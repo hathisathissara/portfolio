@@ -1,0 +1,119 @@
+body {
+    background-color: #121212 !important;
+    color: #fff;
+    /* Default text color එක සුදු පාටට මාරු කිරීම */
+}
+
+.form-control {
+    border-radius: 1.2rem;
+    padding: 1.2rem;
+    border-color: #777;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #00bcd4;
+    box-shadow: 0 0 0 0.3rem rgba(0, 188, 212, 0.4);
+    transform: scale(1.05);
+}
+
+.contact-info {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+    padding: 2rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 20px rgba(0, 188, 212, 0.1);
+}
+
+/* 404 Page Styles */
+.not-found-body {
+    background: linear-gradient(to right, #1f1c2c, #928dab);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+
+.error-box {
+    text-align: center;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.error-code {
+    font-size: 100px;
+    font-weight: bold;
+}
+
+.error-text {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.astronaut {
+    width: 200px;
+    height: auto;
+    margin-bottom: 30px;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.btn-home {
+    font-size: 18px;
+    padding: 10px 25px;
+    border-radius: 30px;
+    background-color: #ffffff;
+    color: #333;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    /* Link එකේ යටින් ඉර එන එක නවත්තන්න */
+}
+
+.btn-home:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+}
+
+/* src/index.css */
+
+.social-icons a {
+    /* දැනටමත් මේ style ටික තියෙන්න ඕනේ */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #222;
+    color: #00bcd4;
+    font-size: 1.5rem;
+    border: 2px solid #00bcd4;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+
+    /* මේ line එක අලුතින් එකතු කරන්න, හැබැයි Bootstrap gap utility එක පාවිච්චි කරනවා නම් මේක ඕනෙ නෑ. */
+    margin-right: 1rem;
+    /* 1rem is about 16px. ඔයාට කැමති අගයක් දාන්න */
+}
+
+
+.social-icons a:last-child {
+    margin-right: 0;
+}
