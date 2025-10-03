@@ -58,8 +58,8 @@ function AboutPage() {
           <div className="card bg-secondary text-white border-0 mx-auto mt-3" style={{ maxWidth: '700px' }}>
             <div className="card-body text-start">
               <ul className="list-group list-group-flush">
-                 <li className="list-group-item bg-secondary text-white"><FontAwesomeIcon icon={faGraduationCap} className="me-2 text-warning" /><strong>2024 - Present:</strong> Higher National Diploma in ICT</li>
-                 <li className="list-group-item bg-secondary text-white"><FontAwesomeIcon icon={faGraduationCap} className="me-2 text-warning" /><strong>2023 - Completed:</strong> Certificate in English</li>
+                 <li className="list-group-item bg-secondary text-white"><FontAwesomeIcon icon={faGraduationCap} className="me-2 text-warning" /><strong>2024 - 2025:</strong> National Diploma in ICT</li>
+                 <li className="list-group-item bg-secondary text-white"><FontAwesomeIcon icon={faGraduationCap} className="me-2 text-warning" /><strong>2023 :</strong> Certificate in English</li>
               </ul>
             </div>
           </div>
