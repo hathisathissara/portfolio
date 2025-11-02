@@ -9,7 +9,7 @@ function Layout() {
         <div>
             <Navbar />
             <main>
-                <Outlet /> {/* <--මෙතන තමයි active page එක render වෙන්නේ */}
+                <Outlet />
             </main>
             <Footer />
         </div>

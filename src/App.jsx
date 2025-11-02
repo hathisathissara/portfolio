@@ -31,7 +31,6 @@ function AnimatedRoutes() {
           <Route path="contact" element={<ContactPage />} />
         </Route>
         
-        
         <Route path="*" element={<NotFoundPage />} /> 
       </Routes>
     </AnimatePresence>
