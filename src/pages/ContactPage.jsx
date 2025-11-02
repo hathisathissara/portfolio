@@ -6,6 +6,7 @@ import {
 import {
     faFacebookF, faTwitter, faInstagram, faLinkedinIn, faGithub, faWhatsapp
 } from '@fortawesome/free-brands-svg-icons';
+import { useForm, ValidationError } from "@formspree/react";
 import PageAnimator from '../components/PageAnimator';
 
 const openWhatsAppChat = () => {
@@ -17,9 +18,9 @@ const openWhatsAppChat = () => {
 };
 
 function ContactPage() {
+    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
     const [focusedField, setFocusedField] = useState(null);
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-    const [formStatus, setFormStatus] = useState('');
+    const [state, handleSubmit] = useForm("xyzzzwkg");
 
     const socialLinks = [
         { icon: faFacebookF, url: 'https://www.facebook.com/hathisa.thissara', title: 'Facebook', color: '#1877f2' },
@@ -54,15 +55,7 @@ function ContactPage() {
         }
     ];
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setFormStatus('sending');
-        // Form will be handled by Formspree
-        setTimeout(() => {
-            setFormStatus('success');
-            setFormData({ name: '', email: '', message: '' });
-        }, 1000);
-    };
+    
 
     return (
         <PageAnimator>
@@ -179,32 +172,33 @@ function ContactPage() {
                                     Send Me a Message
                                 </h3>
 
-                                <form action="https://formspree.io/f/xyzzzwkg" method="POST" onSubmit={handleSubmit}>
-                                    {['name', 'email'].map((field, i) => (
+                                <form onSubmit={handleSubmit}>
+                                    {["name", "email"].map((field, i) => (
                                         <div className="mb-4" key={field}>
                                             <label
                                                 className="form-label fw-bold mb-2 d-flex align-items-center gap-2"
                                                 style={{
-                                                    color: focusedField === field ? '#00bcd4' : 'rgba(255, 255, 255, 0.8)',
-                                                    textTransform: 'uppercase',
-                                                    letterSpacing: '1px',
-                                                    fontSize: '0.85rem',
-                                                    transition: 'color 0.3s ease'
+                                                    color: focusedField === field ? "#00bcd4" : "rgba(255, 255, 255, 0.8)",
+                                                    textTransform: "uppercase",
+                                                    letterSpacing: "1px",
+                                                    fontSize: "0.85rem",
+                                                    transition: "color 0.3s ease",
                                                 }}
                                             >
                                                 <div
                                                     style={{
-                                                        width: '25px',
-                                                        height: '25px',
-                                                        borderRadius: '6px',
-                                                        background: focusedField === field
-                                                            ? 'linear-gradient(135deg, #00bcd4, #673ab7)'
-                                                            : 'rgba(255, 255, 255, 0.1)',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        fontSize: '0.7rem',
-                                                        transition: 'all 0.3s ease'
+                                                        width: "25px",
+                                                        height: "25px",
+                                                        borderRadius: "6px",
+                                                        background:
+                                                            focusedField === field
+                                                                ? "linear-gradient(135deg, #00bcd4, #673ab7)"
+                                                                : "rgba(255, 255, 255, 0.1)",
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        justifyContent: "center",
+                                                        fontSize: "0.7rem",
+                                                        transition: "all 0.3s ease",
                                                     }}
                                                 >
                                                     {i + 1}
@@ -213,27 +207,30 @@ function ContactPage() {
                                             </label>
                                             <div className="position-relative">
                                                 <input
-                                                    type={field === 'email' ? 'email' : 'text'}
+                                                    type={field === "email" ? "email" : "text"}
                                                     className="form-control"
                                                     name={field}
                                                     value={formData[field]}
                                                     onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
-                                                    placeholder={field === 'email' ? 'john@example.com' : 'John Doe'}
+                                                    placeholder={field === "email" ? "john@example.com" : "John Doe"}
                                                     required
                                                     onFocus={() => setFocusedField(field)}
                                                     onBlur={() => setFocusedField(null)}
                                                     style={{
-                                                        background: 'rgba(255, 255, 255, 0.05)',
-                                                        border: `2px solid ${focusedField === field ? '#00bcd4' : 'rgba(255, 255, 255, 0.1)'}`,
-                                                        borderRadius: '1rem',
-                                                        padding: '1.1rem 1.3rem',
-                                                        color: '#fff',
-                                                        fontSize: '1rem',
-                                                        transition: 'all 0.3s ease',
-                                                        transform: focusedField === field ? 'translateY(-2px)' : 'translateY(0)',
-                                                        boxShadow: focusedField === field ? '0 10px 30px rgba(0, 188, 212, 0.2)' : 'none'
+                                                        background: "rgba(255, 255, 255, 0.05)",
+                                                        border: `2px solid ${focusedField === field ? "#00bcd4" : "rgba(255, 255, 255, 0.1)"
+                                                            }`,
+                                                        borderRadius: "1rem",
+                                                        padding: "1.1rem 1.3rem",
+                                                        color: "#fff",
+                                                        fontSize: "1rem",
+                                                        transition: "all 0.3s ease",
+                                                        transform: focusedField === field ? "translateY(-2px)" : "translateY(0)",
+                                                        boxShadow:
+                                                            focusedField === field ? "0 10px 30px rgba(0, 188, 212, 0.2)" : "none",
                                                     }}
                                                 />
+                                                <ValidationError prefix={field} field={field} errors={state.errors} />
                                             </div>
                                         </div>
                                     ))}
@@ -242,26 +239,27 @@ function ContactPage() {
                                         <label
                                             className="form-label fw-bold mb-2 d-flex align-items-center gap-2"
                                             style={{
-                                                color: focusedField === 'message' ? '#00bcd4' : 'rgba(255, 255, 255, 0.8)',
-                                                textTransform: 'uppercase',
-                                                letterSpacing: '1px',
-                                                fontSize: '0.85rem',
-                                                transition: 'color 0.3s ease'
+                                                color: focusedField === "message" ? "#00bcd4" : "rgba(255, 255, 255, 0.8)",
+                                                textTransform: "uppercase",
+                                                letterSpacing: "1px",
+                                                fontSize: "0.85rem",
+                                                transition: "color 0.3s ease",
                                             }}
                                         >
                                             <div
                                                 style={{
-                                                    width: '25px',
-                                                    height: '25px',
-                                                    borderRadius: '6px',
-                                                    background: focusedField === 'message'
-                                                        ? 'linear-gradient(135deg, #00bcd4, #673ab7)'
-                                                        : 'rgba(255, 255, 255, 0.1)',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                    fontSize: '0.7rem',
-                                                    transition: 'all 0.3s ease'
+                                                    width: "25px",
+                                                    height: "25px",
+                                                    borderRadius: "6px",
+                                                    background:
+                                                        focusedField === "message"
+                                                            ? "linear-gradient(135deg, #00bcd4, #673ab7)"
+                                                            : "rgba(255, 255, 255, 0.1)",
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    fontSize: "0.7rem",
+                                                    transition: "all 0.3s ease",
                                                 }}
                                             >
                                                 3
@@ -276,61 +274,76 @@ function ContactPage() {
                                             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                             placeholder="Tell me about your project..."
                                             required
-                                            onFocus={() => setFocusedField('message')}
+                                            onFocus={() => setFocusedField("message")}
                                             onBlur={() => setFocusedField(null)}
                                             style={{
-                                                background: 'rgba(255, 255, 255, 0.05)',
-                                                border: `2px solid ${focusedField === 'message' ? '#00bcd4' : 'rgba(255, 255, 255, 0.1)'}`,
-                                                borderRadius: '1rem',
-                                                padding: '1.1rem 1.3rem',
-                                                color: '#fff',
-                                                fontSize: '1rem',
-                                                resize: 'none',
-                                                transition: 'all 0.3s ease',
-                                                transform: focusedField === 'message' ? 'translateY(-2px)' : 'translateY(0)',
-                                                boxShadow: focusedField === 'message' ? '0 10px 30px rgba(0, 188, 212, 0.2)' : 'none'
+                                                background: "rgba(255, 255, 255, 0.05)",
+                                                border: `2px solid ${focusedField === "message" ? "#00bcd4" : "rgba(255, 255, 255, 0.1)"
+                                                    }`,
+                                                borderRadius: "1rem",
+                                                padding: "1.1rem 1.3rem",
+                                                color: "#fff",
+                                                fontSize: "1rem",
+                                                resize: "none",
+                                                transition: "all 0.3s ease",
+                                                transform: focusedField === "message" ? "translateY(-2px)" : "translateY(0)",
+                                                boxShadow:
+                                                    focusedField === "message" ? "0 10px 30px rgba(0, 188, 212, 0.2)" : "none",
                                             }}
                                         />
+                                        <ValidationError prefix="Message" field="message" errors={state.errors} />
                                     </div>
+
+                                    {/* Success Message */}
+                                    {state.succeeded && (
+                                        <p style={{ color: "#28a745", fontWeight: "bold", marginBottom: "1rem" }}>
+                                            ✓ Message Sent Successfully!
+                                        </p>
+                                    )}
 
                                     <button
                                         type="submit"
                                         className="btn w-100 py-3 position-relative overflow-hidden"
-                                        disabled={formStatus === 'sending'}
+                                        disabled={state.submitting}
                                         style={{
-                                            background: formStatus === 'success'
-                                                ? 'linear-gradient(135deg, #28a745, #20c997)'
-                                                : 'linear-gradient(135deg, #00bcd4, #0097a7)',
-                                            border: 'none',
-                                            color: '#fff',
-                                            borderRadius: '1rem',
-                                            fontWeight: '600',
-                                            letterSpacing: '1px',
-                                            textTransform: 'uppercase',
-                                            fontSize: '1rem',
-                                            boxShadow: '0 10px 30px rgba(0, 188, 212, 0.3)',
-                                            transition: 'all 0.4s ease'
+                                            background: state.succeeded
+                                                ? "linear-gradient(135deg, #28a745, #20c997)"
+                                                : "linear-gradient(135deg, #00bcd4, #0097a7)",
+                                            border: "none",
+                                            color: "#fff",
+                                            borderRadius: "1rem",
+                                            fontWeight: "600",
+                                            letterSpacing: "1px",
+                                            textTransform: "uppercase",
+                                            fontSize: "1rem",
+                                            boxShadow: "0 10px 30px rgba(0, 188, 212, 0.3)",
+                                            transition: "all 0.4s ease",
                                         }}
                                         onMouseEnter={(e) => {
-                                            if (formStatus !== 'success') {
-                                                e.currentTarget.style.transform = 'translateY(-3px)';
-                                                e.currentTarget.style.boxShadow = '0 15px 40px rgba(0, 188, 212, 0.5)';
+                                            if (!state.succeeded) {
+                                                e.currentTarget.style.transform = "translateY(-3px)";
+                                                e.currentTarget.style.boxShadow = "0 15px 40px rgba(0, 188, 212, 0.5)";
                                             }
                                         }}
                                         onMouseLeave={(e) => {
-                                            e.currentTarget.style.transform = 'translateY(0)';
-                                            e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 188, 212, 0.3)';
+                                            e.currentTarget.style.transform = "translateY(0)";
+                                            e.currentTarget.style.boxShadow =
+                                                "0 10px 30px rgba(0, 188, 212, 0.3)";
                                         }}
                                     >
                                         <FontAwesomeIcon
                                             icon={faPaperPlane}
                                             className="me-2"
                                             style={{
-                                                transform: formStatus === 'sending' ? 'translateX(100px)' : 'translateX(0)',
-                                                transition: 'transform 0.4s ease'
+                                                transform: state.submitting ? "translateX(100px)" : "translateX(0)",
+                                                transition: "transform 0.4s ease",
                                             }}
                                         />
-                                        {formStatus === 'sending' ? 'Sending...' : formStatus === 'success' ? '✓ Message Sent!' : 'Send Message'}
+                                        {state.submitting
+                                            ? "Sending..."
+                                            : state.succeeded
+                                                ? "✓ Message Sent!"
+                                                : "Send Message"}
                                     </button>
                                 </form>
                             </div>

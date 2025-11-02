@@ -88,7 +88,7 @@ function Navbar() {
                 letterSpacing: '1px'
               }}
             >
-              Hathisa
+              Hathisa Thissara
             </span>
           </Link>
 

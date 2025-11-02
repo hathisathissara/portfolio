@@ -16,7 +16,12 @@ function AboutPage() {
 
   const experiences = [
     { year: '2024 - 2025', title: 'National Diploma in ICT', delay: '0s' },
-    { year: '2023', title: 'Certificate in English', delay: '0.1s' }
+    { year: '2025', title: 'Server-Side Web Programming', delay: '0.1s' },
+    { year: '2023', title: 'Certificate in English', delay: '0.2s' },
+    { year: '2023', title: 'Front-End Web Development', delay: '0.3s' },
+    { year: '2023', title: 'Web Design For Beginners', delay: '0.4s' },
+    { year: '2023', title: 'Python For Beginners', delay: '0.5s' },
+    { year: '2023', title: 'Introduction TO Cybersecurity', delay: '0.6s' },
   ];
 
   return (
