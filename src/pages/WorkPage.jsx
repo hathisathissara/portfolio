@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import PageAnimator from '../components/PageAnimator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt, faCode, faRocket } from '@fortawesome/free-solid-svg-icons';
+import Recipeimage from '../assets/Recipe.png';
+import News from '../assets/News.png'
+
+
 
 function WorkPage() {
     const [hoveredCard, setHoveredCard] = useState(null);
@@ -67,7 +71,27 @@ function WorkPage() {
             color: '#a8edea',
             tags: ['D3.js', 'Charts', 'Analytics'],
             category: 'web'
-        }
+        },
+        {
+            title: 'Recipe Finder',
+            description: 'RecipeFinder is a dynamic and intuitive web application designed to solve a common problem: "What can I make with the food I have?" By allowing users to input the ingredients on hand, the app fetches a curated list of recipes from the Spoonacular API, promoting creative cooking and reducing food waste.',
+            image: Recipeimage,
+            link: 'https://github.com/hathisathissara/recipe-finder-app',
+            gradient: 'linear-gradient(135deg, #45e487ff 0%, #1c8a94ff 100%)',
+            color: '#45e487ff',
+            tags: ['React JS', 'REST API', 'ES6+', 'Offline Mode'],
+            category: 'web'
+        },
+        {
+            title: 'News App',
+            description: 'A responsive, single-page news application built with React that fetches and displays real-time headlines from around the world. The app allows users to filter news by category, providing a clean and intuitive interface for browsing the latest articles, powered by the Newsdata.io API.',
+            image: News,
+            link: 'https://github.com/hathisathissara/my-news-app',
+            gradient: 'linear-gradient(135deg, #310cebff 0%, #010c0dff 100%)',
+            color: '#310cebff',
+            tags: ['React JS', 'REST API', 'ES6+'],
+            category: 'web'
+        },
     ];
 
     const categories = [
@@ -157,7 +181,7 @@ function WorkPage() {
                         className="d-flex flex-wrap justify-content-center gap-3 mb-5"
                         style={{ animation: 'fadeInUp 1s ease 0.2s both' }}
                     >
-                        {categories.map((cat, i) => (
+                        {categories.map((cat,) => (
                             <button
                                 key={cat.id}
                                 onClick={() => setFilterCategory(cat.id)}
