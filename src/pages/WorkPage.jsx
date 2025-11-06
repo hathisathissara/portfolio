@@ -3,7 +3,10 @@ import PageAnimator from '../components/PageAnimator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt, faCode, faRocket } from '@fortawesome/free-solid-svg-icons';
 import Recipeimage from '../assets/Recipe.png';
-import News from '../assets/News.png'
+import News from '../assets/News.png';
+import Library from '../assets/Library.png';
+import Gift from '../assets/Gift.png';
+import Music from '../assets/Music.png';
 
 
 
@@ -13,13 +16,33 @@ function WorkPage() {
 
     const projects = [
         {
-            title: 'Web Development',
-            description: 'Crafted a responsive, modern website with seamless navigation for diverse audiences.',
-            image: 'https://images.unsplash.com/photo-1569322977266-acff659212fd?w=500&auto=format&fit=crop&q=60',
-            link: 'http://store.musichub.unaux.com',
-            gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            title: 'Music Track Selling store',
+            description: 'A full-stack e-commerce platform with a unique sci-fi theme, built from the ground up with PHP and Bootstrap. Features include a dynamic product catalog, session-based shopping cart, and a complete admin panel for store management.',
+            image: Music,
+            link: 'https://github.com/hathisathissara/sci_music_store',
+            gradient: 'linear-gradient(135deg, #08ece8ff 0%, #7a5e96ff 100%)',
+            color: '#08ece8ff',
+            tags: ['PHP', 'MySQL', 'Bootstrap', 'JavaScript', 'HTML CSS'],
+            category: 'web'
+        },
+        {
+            title: 'Library Management System',
+            description: 'A robust system to digitize and automate library operations. This application features role-based access for librarians and members, a real-time book issuance/return system, and automatic fine calculation.',
+            image: Library,
+            link: 'https://github.com/hathisathissara/library-management',
+            gradient: 'linear-gradient(135deg, #a6aabbff 0%, #764ba2 100%)',
             color: '#667eea',
-            tags: ['React', 'Responsive', 'Modern'],
+            tags: ['PHP', 'MySQL', 'Bootstrap', 'JavaScript', 'HTML CSS'],
+            category: 'web'
+        },
+        {
+            title: 'Gift E-commerce Website',
+            description: 'A curated gift-finding web application designed to simplify the shopping experience.Implemented advanced filtering by occasion and recipient, user wishlists, and product personalization options using PHP, MySQL, and Bootstrap.',
+            image: Gift,
+            link: 'https://github.com/hathisathissara/library-managementhttps://github.com/hathisathissara/e-commerce',
+            gradient: 'linear-gradient(135deg, #d617ddff 0%, #ccc5d2ff 100%)',
+            color: '#d617ddff',
+            tags: ['PHP', 'MySQL', 'Bootstrap', 'JavaScript', 'jQuery', 'HTML CSS'],
             category: 'web'
         },
         {
