@@ -29,7 +29,7 @@ function ServicePage() {
                                 <div className="card-body">
                                     <h5 className="card-title">UI/UX Design</h5>
                                     <p className="card-text">Create intuitive and visually stunning user experiences.</p>
-                                    <a href="#" className="btn btn-primary">Learn More</a>
+                                    <a href="#" className="btn btn-primary">Learn Mor</a>
                                 </div>
                             </div>
                         </div>
