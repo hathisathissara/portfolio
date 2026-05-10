@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCode } from '@fortawesome/free-solid-svg-icons';
 
 function Preloader() {
     const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState(0);
-    const [fadeOut, setFadeOut] = useState(false);
 
     useEffect(() => {
         // Simulate loading progress
@@ -12,301 +14,168 @@ function Preloader() {
                 if (prev >= 100) {
                     clearInterval(interval);
                     setTimeout(() => {
-                        setFadeOut(true);
-                        setTimeout(() => setLoading(false), 600);
-                    }, 500);
+                        setLoading(false);
+                    }, 800); // give time for 100% to render briefly
                     return 100;
                 }
-                return prev + Math.random() * 15;
+                return prev + Math.random() * 20;
             });
-        }, 200);
+        }, 150);
 
         return () => clearInterval(interval);
     }, []);
 
-    if (!loading) return null;
-
     return (
-        <div
-            style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100vh',
-                background: 'linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                zIndex: 9999,
-                opacity: fadeOut ? 0 : 1,
-                transition: 'opacity 0.6s ease',
-                overflow: 'hidden'
-            }}
-        >
-            {/* Animated background */}
-            <div className="position-absolute w-100 h-100" style={{ top: 0, left: 0 }}>
-                {/* Floating orbs */}
-                <div
-                    className="position-absolute rounded-circle"
+        <AnimatePresence>
+            {loading && (
+                <motion.div
+                    initial={{ opacity: 1 }}
+                    exit={{ opacity: 0, filter: 'blur(20px)', scale: 1.1 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     style={{
-                        width: '400px',
-                        height: '400px',
-                        background: 'radial-gradient(circle, rgba(0, 188, 212, 0.2), transparent)',
-                        top: '20%',
-                        left: '10%',
-                        animation: 'float 6s ease-in-out infinite',
-                        filter: 'blur(80px)'
-                    }}
-                />
-                <div
-                    className="position-absolute rounded-circle"
-                    style={{
-                        width: '350px',
-                        height: '350px',
-                        background: 'radial-gradient(circle, rgba(103, 58, 183, 0.2), transparent)',
-                        bottom: '20%',
-                        right: '10%',
-                        animation: 'float 8s ease-in-out infinite',
-                        animationDelay: '2s',
-                        filter: 'blur(80px)'
-                    }}
-                />
-            </div>
-
-            {/* Loading content */}
-            <div className="text-center position-relative" style={{ zIndex: 2 }}>
-                {/* Animated logo/icon */}
-                <div
-                    className="mb-4 position-relative"
-                    style={{
-                        width: '150px',
-                        height: '150px',
-                        margin: '0 auto'
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100vh',
+                        background: '#030712',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        zIndex: 9999,
+                        overflow: 'hidden'
                     }}
                 >
-                    {/* Outer rotating ring */}
-                    <div
-                        className="position-absolute"
-                        style={{
-                            inset: 0,
-                            borderRadius: '50%',
-                            border: '3px solid transparent',
-                            borderTopColor: '#00bcd4',
-                            borderRightColor: '#673ab7',
-                            animation: 'rotate 2s linear infinite'
-                        }}
-                    />
-
-                    {/* Middle rotating ring */}
-                    <div
-                        className="position-absolute"
-                        style={{
-                            inset: '15px',
-                            borderRadius: '50%',
-                            border: '3px solid transparent',
-                            borderTopColor: '#673ab7',
-                            borderLeftColor: '#00bcd4',
-                            animation: 'rotateReverse 1.5s linear infinite'
-                        }}
-                    />
-
-                    {/* Inner pulse circle */}
-                    <div
-                        className="position-absolute"
-                        style={{
-                            inset: '30px',
-                            borderRadius: '50%',
-                            background: 'linear-gradient(135deg, #00bcd4, #673ab7)',
-                            animation: 'pulse 1.5s ease-in-out infinite',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            boxShadow: '0 0 40px rgba(0, 188, 212, 0.6)'
-                        }}
-                    >
-                        {/* Code brackets */}
-                        <span
+                    {/* Abstract Dark Aurora Background */}
+                    <div className="position-absolute w-100 h-100" style={{ pointerEvents: 'none', top: 0, left: 0, zIndex: 0 }}>
+                        <motion.div
+                            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
+                            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                            className="position-absolute"
                             style={{
-                                fontSize: '3rem',
-                                fontWeight: '800',
-                                color: '#fff',
-                                fontFamily: 'monospace'
+                                width: '600px', height: '600px',
+                                background: 'radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 60%)',
+                                top: '-20%', right: '-10%', filter: 'blur(60px)'
                             }}
-                        >
-                            &lt;/&gt;
-                        </span>
+                        />
+                        <motion.div
+                            animate={{ scale: [1, 1.5, 1], x: [0, 50, 0] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                            className="position-absolute"
+                            style={{
+                                width: '500px', height: '500px',
+                                background: 'radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 60%)',
+                                bottom: '-10%', left: '-10%', filter: 'blur(60px)'
+                            }}
+                        />
                     </div>
-                </div>
 
-                {/* Brand name */}
-                <h2
-                    className="mb-4"
-                    style={{
-                        fontSize: '2.5rem',
-                        fontWeight: '800',
-                        background: 'linear-gradient(135deg, #00bcd4, #673ab7)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        letterSpacing: '2px',
-                        animation: 'fadeInUp 1s ease'
-                    }}
-                >
-                    Hathisa Thissara
-                </h2>
+                    {/* Loading content */}
+                    <div className="text-center position-relative d-flex flex-column align-items-center" style={{ zIndex: 2 }}>
+                        {/* Glowing Hexagon/Orb */}
+                        <motion.div
+                            className="mb-5 position-relative d-flex align-items-center justify-content-center"
+                            style={{ width: '120px', height: '120px' }}
+                        >
+                            {/* Outer Rings */}
+                            {[0, 1, 2].map((i) => (
+                                <motion.div
+                                    key={i}
+                                    className="position-absolute rounded-circle"
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={{ 
+                                        scale: [0.8, 1.5, 2],
+                                        opacity: [0, 0.5, 0]
+                                    }}
+                                    transition={{
+                                        duration: 2,
+                                        repeat: Infinity,
+                                        delay: i * 0.6,
+                                        ease: "easeOut"
+                                    }}
+                                    style={{
+                                        inset: 0,
+                                        border: `2px solid ${i % 2 === 0 ? '#38bdf8' : '#8b5cf6'}`,
+                                        boxShadow: `0 0 20px ${i % 2 === 0 ? '#38bdf8' : '#8b5cf6'}50`
+                                    }}
+                                />
+                            ))}
 
-                {/* Progress bar */}
-                <div
-                    className="mx-auto mb-3"
-                    style={{
-                        width: '300px',
-                        height: '6px',
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        borderRadius: '10px',
-                        overflow: 'hidden',
-                        position: 'relative'
-                    }}
-                >
-                    {/* Progress fill */}
-                    <div
-                        style={{
-                            width: `${progress}%`,
-                            height: '100%',
-                            background: 'linear-gradient(90deg, #00bcd4, #673ab7)',
-                            borderRadius: '10px',
-                            transition: 'width 0.3s ease',
-                            boxShadow: '0 0 20px rgba(0, 188, 212, 0.8)'
-                        }}
-                    />
+                            {/* Core Logo Container */}
+                            <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                                className="position-absolute rounded-circle"
+                                style={{
+                                    inset: '10px',
+                                    background: 'conic-gradient(from 0deg, #38bdf8, #8b5cf6, #ec4899, #38bdf8)',
+                                    padding: '4px',
+                                    filter: 'blur(4px)',
+                                    opacity: 0.8
+                                }}
+                            />
 
-                    {/* Shimmer effect */}
-                    <div
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
-                            animation: 'shimmer 2s infinite'
-                        }}
-                    />
-                </div>
+                            <motion.div
+                                animate={{ scale: [1, 1.05, 1] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                className="position-relative rounded-circle d-flex align-items-center justify-content-center"
+                                style={{
+                                    inset: '14px',
+                                    width: '92px',
+                                    height: '92px',
+                                    background: '#030712',
+                                    border: '2px solid rgba(255,255,255,0.1)',
+                                    zIndex: 2
+                                }}
+                            >
+                                <FontAwesomeIcon icon={faCode} style={{ fontSize: '2rem', color: '#f8fafc' }} />
+                            </motion.div>
+                        </motion.div>
 
-                {/* Progress percentage */}
-                <p
-                    style={{
-                        fontSize: '1.2rem',
-                        fontWeight: '600',
-                        color: '#00bcd4',
-                        marginBottom: '1rem',
-                        fontFamily: 'monospace'
-                    }}
-                >
-                    {Math.round(progress)}%
-                </p>
-
-                {/* Loading text */}
-                <p
-                    style={{
-                        color: 'rgba(255, 255, 255, 0.7)',
-                        fontSize: '0.95rem',
-                        letterSpacing: '2px',
-                        textTransform: 'uppercase',
-                        fontWeight: '600'
-                    }}
-                >
-                    Loading Experience
-                    <span style={{ animation: 'dots 1.5s infinite' }}>...</span>
-                </p>
-
-                {/* Floating particles */}
-                {[...Array(8)].map((_, i) => (
-                    <div
-                        key={i}
-                        className="position-absolute"
-                        style={{
-                            width: `${Math.random() * 6 + 3}px`,
-                            height: `${Math.random() * 6 + 3}px`,
-                            background: i % 2 === 0 ? '#00bcd4' : '#673ab7',
-                            borderRadius: '50%',
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                            opacity: 0.6,
-                            animation: `floatParticle ${3 + Math.random() * 3}s ease-in-out infinite`,
-                            animationDelay: `${Math.random() * 2}s`,
-                            boxShadow: `0 0 10px ${i % 2 === 0 ? '#00bcd4' : '#673ab7'}`
-                        }}
-                    />
-                ))}
-            </div>
-
-            <style>{`
-                @keyframes rotate {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
-                }
-
-                @keyframes rotateReverse {
-                    0% { transform: rotate(360deg); }
-                    100% { transform: rotate(0deg); }
-                }
-
-                @keyframes pulse {
-                    0%, 100% { 
-                        transform: scale(1);
-                        opacity: 1;
-                    }
-                    50% { 
-                        transform: scale(1.05);
-                        opacity: 0.8;
-                    }
-                }
-
-                @keyframes fadeInUp {
-                    from {
-                        opacity: 0;
-                        transform: translateY(20px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-30px); }
-                }
-
-                @keyframes floatParticle {
-                    0%, 100% { 
-                        transform: translate(0, 0) scale(1); 
-                        opacity: 0.6;
-                    }
-                    33% { 
-                        transform: translate(20px, -20px) scale(1.2); 
-                        opacity: 1;
-                    }
-                    66% { 
-                        transform: translate(-20px, 20px) scale(0.8); 
-                        opacity: 0.4;
-                    }
-                }
-
-                @keyframes shimmer {
-                    0% { transform: translateX(-100%); }
-                    100% { transform: translateX(100%); }
-                }
-
-                @keyframes dots {
-                    0%, 20% { content: '.'; }
-                    40% { content: '..'; }
-                    60%, 100% { content: '...'; }
-                }
-            `}</style>
-        </div>
+                        {/* Progress Container */}
+                        <div style={{ width: '250px' }}>
+                            <div className="d-flex justify-content-between mb-2">
+                                <motion.span 
+                                    initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                                    className="small fw-bold text-uppercase" 
+                                    style={{ color: '#94a3b8', letterSpacing: '2px' }}
+                                >
+                                    System Initializing
+                                </motion.span>
+                                <motion.span 
+                                    className="small fw-bold" 
+                                    style={{ color: '#38bdf8' }}
+                                >
+                                    {Math.min(100, Math.round(progress))}%
+                                </motion.span>
+                            </div>
+                            
+                            {/* Bar */}
+                            <div
+                                style={{
+                                    width: '100%',
+                                    height: '4px',
+                                    background: 'rgba(255, 255, 255, 0.05)',
+                                    borderRadius: '4px',
+                                    overflow: 'hidden'
+                                }}
+                            >
+                                <motion.div
+                                    style={{
+                                        height: '100%',
+                                        background: 'linear-gradient(90deg, #38bdf8, #8b5cf6)',
+                                        boxShadow: '0 0 10px #38bdf8'
+                                    }}
+                                    initial={{ width: 0 }}
+                                    animate={{ width: `${Math.min(100, progress)}%` }}
+                                    transition={{ ease: "easeOut", duration: 0.2 }}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 }
 

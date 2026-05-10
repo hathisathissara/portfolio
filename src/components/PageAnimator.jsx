@@ -3,78 +3,65 @@ import { motion } from 'framer-motion';
 
 // Multiple animation variants
 const animationVariants = {
-    // Slide from bottom (default)
+    // New Cyber-Aurora Default
     slideUp: {
-        initial: { opacity: 0, y: 100 },
-        animate: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: -100 }
+        initial: { opacity: 0, y: 40, scale: 0.98, filter: 'blur(10px)' },
+        animate: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
+        exit: { opacity: 0, y: -40, scale: 0.98, filter: 'blur(10px)' }
     },
-
+    cyberReveal: {
+        initial: { opacity: 0, scale: 1.05, filter: 'blur(20px)' },
+        animate: { opacity: 1, scale: 1, filter: 'blur(0px)' },
+        exit: { opacity: 0, scale: 0.95, filter: 'blur(20px)' }
+    },
     // Fade and scale
     fadeScale: {
         initial: { opacity: 0, scale: 0.9 },
         animate: { opacity: 1, scale: 1 },
         exit: { opacity: 0, scale: 1.1 }
     },
-
     // Slide from right
     slideRight: {
         initial: { opacity: 0, x: 100 },
         animate: { opacity: 1, x: 0 },
         exit: { opacity: 0, x: -100 }
     },
-
     // Slide from left
     slideLeft: {
         initial: { opacity: 0, x: -100 },
         animate: { opacity: 1, x: 0 },
         exit: { opacity: 0, x: 100 }
     },
-
-    // Rotate and fade
-    rotateFade: {
-        initial: { opacity: 0, rotateX: 90 },
-        animate: { opacity: 1, rotateX: 0 },
-        exit: { opacity: 0, rotateX: -90 }
-    },
-
     // Zoom in
     zoomIn: {
         initial: { opacity: 0, scale: 0.5 },
         animate: { opacity: 1, scale: 1 },
         exit: { opacity: 0, scale: 0.5 }
-    },
-
-    // Blur fade
-    blurFade: {
-        initial: { opacity: 0, filter: 'blur(10px)' },
-        animate: { opacity: 1, filter: 'blur(0px)' },
-        exit: { opacity: 0, filter: 'blur(10px)' }
     }
 };
 
 // Transition configurations
 const transitionPresets = {
     smooth: {
-        duration: 0.6,
-        ease: [0.43, 0.13, 0.23, 0.96]
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1] // Custom snappy spring-like easing
+    },
+    cyber: {
+        duration: 1,
+        ease: [0.22, 1, 0.36, 1]
     },
     bouncy: {
         duration: 0.8,
         ease: [0.68, -0.55, 0.265, 1.55]
     },
     quick: {
-        duration: 0.3,
+        duration: 0.4,
         ease: 'easeInOut'
-    },
-    slow: {
-        duration: 1.2,
-        ease: 'easeOut'
     },
     spring: {
         type: 'spring',
         stiffness: 100,
-        damping: 15
+        damping: 20
     }
 };
 
@@ -102,7 +89,8 @@ function PageAnimator({
             transition={transitionConfig}
             style={{
                 width: '100%',
-                minHeight: '100vh'
+                minHeight: '100vh',
+                position: 'relative'
             }}
         >
             {children}
