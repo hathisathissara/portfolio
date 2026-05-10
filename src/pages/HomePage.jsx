@@ -4,6 +4,7 @@ import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { Helmet } from "react-helmet";
 import PageAnimator from '../components/PageAnimator';
+import { motion } from 'framer-motion';
 
 const openWhatsAppChat = () => {
     const phoneNumber = "94701207991";
@@ -25,7 +26,6 @@ function HomePage() {
     useEffect(() => {
         const type = () => {
             const currentWord = words[wordIndex];
-
             if (isDeleting) {
                 setDynamicText(currentWord.substring(0, charIndex - 1));
                 setCharIndex(prev => prev - 1);
@@ -57,253 +57,244 @@ function HomePage() {
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.2, delayChildren: 0.3 }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+    };
+
     return (
         <PageAnimator>
             <Helmet>
                 <title>Hathisa Thissara | Software Developer & Designer</title>
-                <meta
-                    name="description"
-                    content="Hi, I'm Hathisa Thissara – a creative software developer and designer. Explore my portfolio, projects, coding skills, and achievements."
-                />
+                <meta name="description" content="Hi, I'm Hathisa Thissara – a creative software developer and designer." />
             </Helmet>
 
             <section
                 className="vh-100 d-flex align-items-center justify-content-center text-white text-center position-relative"
                 id="home"
-                style={{
-                    background: 'linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%)',
-                    overflow: 'hidden'
-                }}
+                style={{ backgroundColor: '#030712', overflow: 'hidden' }}
             >
-                {/* Animated background elements */}
-                <div
-                    className="position-absolute w-100 h-100"
+                {/* Advanced Aurora Background Elements */}
+                <div className="position-absolute w-100 h-100" style={{ pointerEvents: 'none', zIndex: 0 }}>
+                    {/* Interactive Mouse Glow */}
+                    <motion.div
+                        className="position-absolute rounded-circle"
+                        animate={{
+                            x: mousePosition.x - 400,
+                            y: mousePosition.y - 400,
+                        }}
+                        transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
+                        style={{
+                            width: '800px',
+                            height: '800px',
+                            background: 'radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 60%)',
+                            filter: 'blur(40px)',
+                        }}
+                    />
+                    
+                    {/* Floating Orbs */}
+                    <motion.div
+                        className="position-absolute rounded-circle"
+                        animate={{
+                            y: [0, -40, 0],
+                            x: [0, 30, 0],
+                            scale: [1, 1.1, 1],
+                        }}
+                        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                        style={{
+                            width: '50vw',
+                            height: '50vw',
+                            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 50%)',
+                            top: '-20%',
+                            left: '-10%',
+                            filter: 'blur(80px)'
+                        }}
+                    />
+                    <motion.div
+                        className="position-absolute rounded-circle"
+                        animate={{
+                            y: [0, 50, 0],
+                            x: [0, -40, 0],
+                            scale: [1, 1.2, 1],
+                        }}
+                        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                        style={{
+                            width: '45vw',
+                            height: '45vw',
+                            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 50%)',
+                            bottom: '-10%',
+                            right: '-5%',
+                            filter: 'blur(80px)'
+                        }}
+                    />
+                </div>
+
+                {/* Grid Overlay for Texture */}
+                <div 
+                    className="position-absolute w-100 h-100" 
                     style={{
-                        background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 188, 212, 0.15) 0%, transparent 50%)`,
-                        transition: 'background 0.3s ease',
-                        pointerEvents: 'none'
+                        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+                        backgroundSize: '50px 50px',
+                        zIndex: 0,
+                        opacity: 0.4
                     }}
                 />
 
-                {/* Floating geometric shapes */}
-                <div className="position-absolute w-100 h-100" style={{ pointerEvents: 'none' }}>
-                    <div
-                        className="position-absolute rounded-circle"
-                        style={{
-                            width: '300px',
-                            height: '300px',
-                            background: 'linear-gradient(135deg, rgba(0, 188, 212, 0.1), rgba(103, 58, 183, 0.1))',
-                            top: '10%',
-                            left: '5%',
-                            animation: 'float 6s ease-in-out infinite',
-                            filter: 'blur(40px)'
-                        }}
-                    />
-                    <div
-                        className="position-absolute rounded-circle"
-                        style={{
-                            width: '400px',
-                            height: '400px',
-                            background: 'linear-gradient(135deg, rgba(103, 58, 183, 0.1), rgba(0, 188, 212, 0.1))',
-                            bottom: '10%',
-                            right: '5%',
-                            animation: 'float 8s ease-in-out infinite',
-                            animationDelay: '2s',
-                            filter: 'blur(40px)'
-                        }}
-                    />
-                </div>
-
                 <div className="container position-relative" style={{ zIndex: 2 }}>
-                    {/* Greeting text with fade-in */}
-                    <div style={{ animation: 'fadeInUp 1s ease' }}>
-                        <h2 className="fw-light mb-2 fs-3" style={{
-                            opacity: 0.9,
-                            letterSpacing: '2px'
-                        }}>
-                            Hi, I'm
-                        </h2>
-                    </div>
+                    <motion.div
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="d-flex flex-column align-items-center"
+                    >
+                        {/* Greeting */}
+                        <motion.div variants={itemVariants} className="mb-3">
+                            <span className="px-4 py-2 rounded-pill text-uppercase fw-bold" style={{
+                                background: 'rgba(255, 255, 255, 0.05)',
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                color: '#38bdf8',
+                                letterSpacing: '2px',
+                                fontSize: '0.85rem'
+                            }}>
+                                Welcome to my world
+                            </span>
+                        </motion.div>
 
-                    {/* Name with enhanced glow effect */}
-                    <div style={{ animation: 'fadeInUp 1s ease 0.2s both' }}>
-                        <h1
-                            className="display-3 fw-bold mb-3"
+                        {/* Name */}
+                        <motion.h1 
+                            variants={itemVariants}
+                            className="display-2 fw-bolder mb-2"
                             style={{
-                                background: 'linear-gradient(135deg, #00bcd4, #673ab7)',
+                                background: 'linear-gradient(to right, #fff, #94a3b8)',
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
-                                backgroundClip: 'text',
-                                textShadow: '0 0 80px rgba(0, 188, 212, 0.5)',
-                                letterSpacing: '3px'
+                                letterSpacing: '-1px'
                             }}
                         >
                             Hathisa Thissara
-                        </h1>
-                    </div>
+                        </motion.h1>
 
-                    {/* Dynamic typing text */}
-                    <div style={{ animation: 'fadeInUp 1s ease 0.4s both' }}>
-                        <h2 className="fw-bold fs-2 mb-4" style={{ minHeight: '60px' }}>
-                            I'm a{' '}
-                            <span
+                        {/* Dynamic Text */}
+                        <motion.div variants={itemVariants} className="mb-5" style={{ minHeight: '60px' }}>
+                            <h2 className="fs-3 fw-light text-secondary">
+                                I build digital experiences as a{' '}
+                                <span 
+                                    className="fw-bold position-relative"
+                                    style={{
+                                        color: '#38bdf8',
+                                        textShadow: '0 0 20px rgba(56, 189, 248, 0.4)'
+                                    }}
+                                >
+                                    {dynamicText}
+                                    <motion.span
+                                        animate={{ opacity: [1, 0, 1] }}
+                                        transition={{ duration: 0.8, repeat: Infinity }}
+                                        style={{
+                                            borderRight: '3px solid #38bdf8',
+                                            marginLeft: '2px'
+                                        }}
+                                    />
+                                </span>
+                            </h2>
+                        </motion.div>
+
+                        {/* Social Links */}
+                        <motion.div variants={itemVariants} className="d-flex justify-content-center gap-4 mb-5">
+                            {[
+                                { icon: faGithub, url: 'https://github.com/hathisathissara', color: '#fff' },
+                                { icon: faLinkedin, url: 'https://www.linkedin.com/in/hathisa-thissara', color: '#0077b5' },
+                                { icon: faEnvelope, url: 'mailto:hatheesha6504@gmail.com', color: '#ea4335' }
+                            ].map((social, i) => (
+                                <motion.a
+                                    key={i}
+                                    href={social.url}
+                                    className="text-white position-relative"
+                                    whileHover={{ y: -8, scale: 1.1 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    style={{
+                                        width: '60px',
+                                        height: '60px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        borderRadius: '16px',
+                                        background: 'rgba(255, 255, 255, 0.03)',
+                                        backdropFilter: 'blur(10px)',
+                                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                                        fontSize: '1.5rem',
+                                        boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)'
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.border = `1px solid ${social.color}50`;
+                                        e.currentTarget.style.boxShadow = `0 10px 30px -10px ${social.color}80`;
+                                        e.currentTarget.style.color = social.color;
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+                                        e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.5)';
+                                        e.currentTarget.style.color = '#fff';
+                                    }}
+                                >
+                                    <FontAwesomeIcon icon={social.icon} />
+                                </motion.a>
+                            ))}
+                        </motion.div>
+
+                        {/* Buttons */}
+                        <motion.div variants={itemVariants} className="d-flex gap-4">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="btn px-5 py-3 rounded-pill fw-bold"
+                                onClick={openWhatsAppChat}
                                 style={{
-                                    background: 'linear-gradient(135deg, #00bcd4, #0097a7)',
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
-                                    backgroundClip: 'text',
-                                    position: 'relative'
+                                    background: 'linear-gradient(135deg, #38bdf8, #8b5cf6)',
+                                    color: '#fff',
+                                    border: 'none',
+                                    boxShadow: '0 10px 30px -10px rgba(139, 92, 246, 0.8)',
+                                    letterSpacing: '1px'
                                 }}
                             >
-                                {dynamicText}
-                                <span style={{
-                                    borderLeft: '3px solid #00bcd4',
-                                    animation: 'blink 0.7s infinite',
-                                    marginLeft: '2px'
-                                }} />
-                            </span>
-                        </h2>
-                    </div>
-
-                    {/* Social icons with stagger animation */}
-                    <div
-                        className="d-flex justify-content-center gap-4 fs-3 my-4"
-                        style={{ animation: 'fadeInUp 1s ease 0.6s both' }}
-                    >
-                        {[
-                            { icon: faGithub, url: 'https://github.com/hathisathissara', label: 'GitHub', delay: '0s' },
-                            { icon: faLinkedin, url: 'https://www.linkedin.com/in/hathisa-thissara', label: 'LinkedIn', delay: '0.1s' },
-                            { icon: faEnvelope, url: 'mailto:hatheesha6504@gmail.com', label: 'Email', delay: '0.2s' }
-                        ].map((social, i) => (
-                            <a
-                                key={i}
-                                href={social.url}
-                                className="text-white position-relative"
-                                aria-label={social.label}
+                                Let's Talk
+                            </motion.button>
+                            <motion.a
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                href="/hathisa_thissara_2026.pdf"
+                                download
+                                className="btn px-5 py-3 rounded-pill fw-bold"
                                 style={{
-                                    width: '55px',
-                                    height: '55px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    borderRadius: '50%',
                                     background: 'rgba(255, 255, 255, 0.05)',
                                     backdropFilter: 'blur(10px)',
-                                    border: '2px solid rgba(0, 188, 212, 0.3)',
-                                    transition: 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-                                    animation: `fadeInUp 1s ease ${social.delay} both`
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(-8px) scale(1.15)';
-                                    e.currentTarget.style.background = 'linear-gradient(135deg, #00bcd4, #673ab7)';
-                                    e.currentTarget.style.boxShadow = '0 15px 35px rgba(0, 188, 212, 0.4)';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                                    e.currentTarget.style.boxShadow = 'none';
+                                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                                    color: '#fff',
+                                    letterSpacing: '1px'
                                 }}
                             >
-                                <FontAwesomeIcon icon={social.icon} />
-                            </a>
-                        ))}
-                    </div>
-
-                    {/* CTA buttons */}
-                    <div
-                        className="d-grid gap-3 d-md-flex justify-content-center"
-                        style={{ animation: 'fadeInUp 1s ease 0.8s both' }}
-                    >
-                        <button
-                            className="btn px-5 py-3 position-relative overflow-hidden"
-                            onClick={openWhatsAppChat}
-                            style={{
-                                background: 'transparent',
-                                border: '2px solid #00bcd4',
-                                color: '#00bcd4',
-                                borderRadius: '50px',
-                                fontWeight: '600',
-                                letterSpacing: '1px',
-                                transition: 'all 0.4s ease'
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.background = '#00bcd4';
-                                e.currentTarget.style.color = '#fff';
-                                e.currentTarget.style.transform = 'translateY(-3px)';
-                                e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 188, 212, 0.4)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.background = 'transparent';
-                                e.currentTarget.style.color = '#00bcd4';
-                                e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = 'none';
-                            }}
-                        >
-                            Hire Me
-                        </button>
-                        <a
-                            href="/hathisa_thissara_2026.pdf"
-                            download
-                            className="btn px-5 py-3"
-                            style={{
-                                background: 'linear-gradient(135deg, #00bcd4, #0097a7)',
-                                border: 'none',
-                                color: '#fff',
-                                borderRadius: '50px',
-                                fontWeight: '600',
-                                letterSpacing: '1px',
-                                boxShadow: '0 4px 15px rgba(0, 188, 212, 0.3)',
-                                transition: 'all 0.4s ease'
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-3px)';
-                                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 188, 212, 0.5)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 188, 212, 0.3)';
-                            }}
-                        >
-                            Download CV
-                        </a>
-                    </div>
+                                Download CV
+                            </motion.a>
+                        </motion.div>
+                    </motion.div>
                 </div>
 
-                {/* Scroll indicator */}
-                <div
-                    className="position-absolute bottom-0 start-50 translate-middle-x mb-4"
-                    style={{
-                        animation: 'bounce 2s infinite',
-                        opacity: 0.7
-                    }}
+                {/* Scroll Down Indicator */}
+                <motion.div
+                    className="position-absolute bottom-0 start-50 translate-middle-x mb-4 text-secondary"
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                 >
-                    <FontAwesomeIcon icon={faChevronDown} className="fs-4" />
-                </div>
+                    <FontAwesomeIcon icon={faChevronDown} className="fs-5" />
+                </motion.div>
             </section>
-
-            <style>{`
-                @keyframes fadeInUp {
-                    from {
-                        opacity: 0;
-                        transform: translateY(30px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-
-                @keyframes blink {
-                    0%, 100% { opacity: 1; }
-                    50% { opacity: 0; }
-                }
-
-                @keyframes bounce {
-                    0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-                    40% { transform: translateY(-10px) translateX(-50%); }
-                    60% { transform: translateY(-5px) translateX(-50%); }
-                }
-            `}</style>
         </PageAnimator>
     );
 }

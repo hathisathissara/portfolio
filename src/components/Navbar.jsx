@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faCode } from '@fortawesome/free-solid-svg-icons';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -17,7 +18,7 @@ function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -30,21 +31,17 @@ function Navbar() {
 
   return (
     <>
-      <nav
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
         className="navbar navbar-expand-lg fixed-top"
         style={{
-          background: scrolled
-            ? 'rgba(10, 14, 39, 0.95)'
-            : 'transparent',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled
-            ? '1px solid rgba(255, 255, 255, 0.1)'
-            : 'none',
-          transition: 'all 0.4s ease',
-          padding: scrolled ? '0.8rem 0' : '1.2rem 0',
-          boxShadow: scrolled
-            ? '0 10px 30px rgba(0, 0, 0, 0.3)'
-            : 'none',
+          background: scrolled ? 'rgba(3, 7, 18, 0.7)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(16px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid transparent',
+          padding: scrolled ? '0.8rem 0' : '1.5rem 0',
+          transition: 'all 0.3s ease',
           zIndex: 1000
         }}
       >
@@ -53,39 +50,29 @@ function Navbar() {
           <Link
             to="/"
             className="navbar-brand d-flex align-items-center"
-            style={{
-              fontSize: '1.5rem',
-              fontWeight: '800',
-              textDecoration: 'none',
-              transition: 'all 0.3s ease'
-            }}
+            style={{ textDecoration: 'none' }}
           >
-            <div
+            <motion.div
+              whileHover={{ rotate: 180, scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 10 }}
               className="d-flex align-items-center justify-content-center me-2"
               style={{
-                width: '45px',
-                height: '45px',
-                borderRadius: '12px',
-                background: 'linear-gradient(135deg, #00bcd4, #673ab7)',
-                boxShadow: '0 5px 15px rgba(0, 188, 212, 0.4)',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'rotate(360deg) scale(1.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'rotate(0deg) scale(1)';
+                width: '40px',
+                height: '40px',
+                borderRadius: '10px',
+                background: 'linear-gradient(135deg, #38bdf8, #8b5cf6)',
+                boxShadow: '0 0 20px rgba(56, 189, 248, 0.4)',
               }}
             >
-              <FontAwesomeIcon icon={faCode} style={{ color: '#fff' }} />
-            </div>
+              <FontAwesomeIcon icon={faCode} style={{ color: '#fff', fontSize: '1.2rem' }} />
+            </motion.div>
             <span
+              className="fw-bold fs-4"
               style={{
-                background: 'linear-gradient(135deg, #00bcd4, #673ab7)',
+                background: 'linear-gradient(to right, #f8fafc, #94a3b8)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                letterSpacing: '1px'
+                letterSpacing: '-0.5px'
               }}
             >
               Hathisa Thissara
@@ -94,62 +81,59 @@ function Navbar() {
 
           {/* Mobile menu toggle */}
           <button
-            className="navbar-toggler border-0"
+            className="navbar-toggler border-0 d-lg-none"
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            style={{
-              background: 'rgba(0, 188, 212, 0.1)',
-              borderRadius: '12px',
-              padding: '0.5rem 0.8rem',
-              transition: 'all 0.3s ease'
-            }}
+            style={{ padding: 0 }}
           >
-            <FontAwesomeIcon
-              icon={mobileMenuOpen ? faTimes : faBars}
+            <motion.div 
+              whileTap={{ scale: 0.9 }}
+              className="d-flex align-items-center justify-content-center"
               style={{
-                color: '#00bcd4',
-                fontSize: '1.5rem',
-                transition: 'all 0.3s ease'
+                width: '45px', height: '45px',
+                background: 'rgba(255,255,255,0.05)',
+                borderRadius: '12px',
+                border: '1px solid rgba(255,255,255,0.1)'
               }}
-            />
+            >
+              <FontAwesomeIcon
+                icon={mobileMenuOpen ? faTimes : faBars}
+                style={{ color: '#f8fafc', fontSize: '1.2rem' }}
+              />
+            </motion.div>
           </button>
 
           {/* Desktop Navigation */}
-          <div className="collapse navbar-collapse">
-            <ul className="navbar-nav ms-auto align-items-center">
+          <div className="collapse navbar-collapse d-none d-lg-block">
+            <ul className="navbar-nav ms-auto align-items-center gap-3">
               {navLinks.map((link, index) => {
                 const isActive = location.pathname === link.path;
                 return (
-                  <li key={index} className="nav-item mx-2">
+                  <li key={index} className="nav-item">
                     <Link
                       to={link.path}
                       className="nav-link position-relative"
                       style={{
-                        color: isActive ? '#00bcd4' : '#fff',
+                        color: isActive ? '#f8fafc' : '#94a3b8',
                         fontWeight: '600',
-                        letterSpacing: '1px',
+                        fontSize: '0.95rem',
                         padding: '0.5rem 1rem',
-                        transition: 'all 0.3s ease',
-                        textDecoration: 'none'
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isActive) e.currentTarget.style.color = '#00bcd4';
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive) e.currentTarget.style.color = '#fff';
+                        transition: 'color 0.3s ease',
                       }}
                     >
                       {link.name}
                       {isActive && (
-                        <div
-                          className="position-absolute start-50 translate-middle-x"
+                        <motion.div
+                          layoutId="navbar-indicator"
+                          className="position-absolute bottom-0 start-50 translate-middle-x"
                           style={{
-                            bottom: '0',
-                            width: '60%',
-                            height: '2px',
-                            background: 'linear-gradient(90deg, transparent, #00bcd4, transparent)',
-                            animation: 'slideIn 0.3s ease'
+                            width: '20px',
+                            height: '3px',
+                            borderRadius: '3px',
+                            background: '#38bdf8',
+                            boxShadow: '0 0 10px #38bdf8'
                           }}
+                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         />
                       )}
                     </Link>
@@ -158,168 +142,106 @@ function Navbar() {
               })}
 
               {/* CTA Button */}
-              <li className="nav-item ms-3">
-                <Link
-                  to="/contact"
-                  className="btn"
-                  style={{
-                    background: 'linear-gradient(135deg, #00bcd4, #0097a7)',
-                    border: 'none',
-                    color: '#fff',
-                    borderRadius: '50px',
-                    padding: '0.6rem 1.5rem',
-                    fontWeight: '600',
-                    letterSpacing: '1px',
-                    fontSize: '0.9rem',
-                    textDecoration: 'none',
-                    boxShadow: '0 5px 15px rgba(0, 188, 212, 0.3)',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 188, 212, 0.5)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 5px 15px rgba(0, 188, 212, 0.3)';
-                  }}
-                >
-                  Hire Me
-                </Link>
+              <li className="nav-item ms-2">
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link
+                    to="/contact"
+                    className="btn rounded-pill fw-bold px-4 py-2"
+                    style={{
+                      background: 'rgba(255,255,255,0.05)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      color: '#f8fafc',
+                      backdropFilter: 'blur(10px)',
+                      transition: 'all 0.3s ease',
+                    }}
+                    onMouseEnter={e => {
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #38bdf8, #8b5cf6)';
+                        e.currentTarget.style.border = '1px solid transparent';
+                    }}
+                    onMouseLeave={e => {
+                        e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                        e.currentTarget.style.border = '1px solid rgba(255,255,255,0.1)';
+                    }}
+                  >
+                    Hire Me
+                  </Link>
+                </motion.div>
               </li>
             </ul>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
-      {/* Mobile Menu */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100vh',
-          background: 'rgba(10, 14, 39, 0.98)',
-          backdropFilter: 'blur(20px)',
-          zIndex: 999,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          opacity: mobileMenuOpen ? 1 : 0,
-          pointerEvents: mobileMenuOpen ? 'all' : 'none',
-          transition: 'opacity 0.4s ease'
-        }}
-      >
-        <ul
-          className="list-unstyled text-center"
-          style={{
-            transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(-30px)',
-            transition: 'transform 0.4s ease'
-          }}
-        >
-          {navLinks.map((link, index) => {
-            const isActive = location.pathname === link.path;
-            return (
-              <li
-                key={index}
-                className="mb-4"
-                style={{
-                  animation: mobileMenuOpen
-                    ? `fadeInUp 0.5s ease ${index * 0.1}s both`
-                    : 'none'
-                }}
-              >
-                <Link
-                  to={link.path}
-                  style={{
-                    fontSize: '2rem',
-                    fontWeight: '700',
-                    color: isActive ? '#00bcd4' : '#fff',
-                    textDecoration: 'none',
-                    transition: 'all 0.3s ease',
-                    display: 'inline-block',
-                    position: 'relative'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#00bcd4';
-                    e.currentTarget.style.transform = 'scale(1.1)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = isActive ? '#00bcd4' : '#fff';
-                    e.currentTarget.style.transform = 'scale(1)';
-                  }}
-                >
-                  {link.name}
-                  {isActive && (
-                    <div
-                      style={{
-                        position: 'absolute',
-                        bottom: '-10px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '60%',
-                        height: '3px',
-                        background: 'linear-gradient(90deg, transparent, #00bcd4, transparent)'
-                      }}
-                    />
-                  )}
-                </Link>
-              </li>
-            );
-          })}
-          <li
-            className="mt-5"
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="d-lg-none"
             style={{
-              animation: mobileMenuOpen
-                ? `fadeInUp 0.5s ease ${navLinks.length * 0.1}s both`
-                : 'none'
+              position: 'fixed',
+              top: '80px', // Below navbar
+              left: '5%',
+              width: '90%',
+              background: 'rgba(3, 7, 18, 0.95)',
+              backdropFilter: 'blur(20px)',
+              borderRadius: '24px',
+              border: '1px solid rgba(255, 255, 255, 0.05)',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
+              zIndex: 999,
+              padding: '2rem'
             }}
           >
-            <Link
-              to="/contact"
-              className="btn"
-              style={{
-                background: 'linear-gradient(135deg, #00bcd4, #0097a7)',
-                border: 'none',
-                color: '#fff',
-                borderRadius: '50px',
-                padding: '1rem 3rem',
-                fontWeight: '600',
-                letterSpacing: '1px',
-                fontSize: '1.2rem',
-                textDecoration: 'none',
-                boxShadow: '0 10px 30px rgba(0, 188, 212, 0.4)',
-                transition: 'all 0.3s ease'
-              }}
-            >
-              Hire Me
-            </Link>
-          </li>
-        </ul>
-      </div>
-
-      <style>{`
-                @keyframes slideIn {
-                    from {
-                        transform: translateX(-50%) scaleX(0);
-                    }
-                    to {
-                        transform: translateX(-50%) scaleX(1);
-                    }
-                }
-
-                @keyframes fadeInUp {
-                    from {
-                        opacity: 0;
-                        transform: translateY(20px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-            `}</style>
+            <ul className="list-unstyled text-center m-0 d-flex flex-column gap-4">
+              {navLinks.map((link, index) => {
+                const isActive = location.pathname === link.path;
+                return (
+                  <motion.li
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    key={index}
+                  >
+                    <Link
+                      to={link.path}
+                      style={{
+                        fontSize: '1.5rem',
+                        fontWeight: '700',
+                        color: isActive ? '#38bdf8' : '#94a3b8',
+                        textDecoration: 'none',
+                        transition: 'color 0.3s ease'
+                      }}
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.li>
+                );
+              })}
+              <motion.li
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navLinks.length * 0.1 }}
+                className="mt-2"
+              >
+                <Link
+                  to="/contact"
+                  className="btn w-100 rounded-pill py-3 fw-bold"
+                  style={{
+                    background: 'linear-gradient(135deg, #38bdf8, #8b5cf6)',
+                    color: '#fff',
+                    border: 'none'
+                  }}
+                >
+                  Hire Me
+                </Link>
+              </motion.li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

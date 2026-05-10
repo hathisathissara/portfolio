@@ -2,47 +2,42 @@ import React, { useState } from "react";
 import PageAnimator from '../components/PageAnimator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt, faCode, faRocket } from '@fortawesome/free-solid-svg-icons';
+import { motion, AnimatePresence } from 'framer-motion';
 import Recipeimage from '../assets/Recipe.png';
 import News from '../assets/News.png';
 import Library from '../assets/Library.png';
 import Gift from '../assets/Gift.png';
 import Music from '../assets/Music.png';
 
-
-
 function WorkPage() {
-    const [hoveredCard, setHoveredCard] = useState(null);
     const [filterCategory, setFilterCategory] = useState('all');
 
     const projects = [
         {
             title: 'Music Track Selling store',
-            description: 'A full-stack e-commerce platform with a unique sci-fi theme, built from the ground up with PHP and Bootstrap. Features include a dynamic product catalog, session-based shopping cart, and a complete admin panel for store management.',
+            description: 'A full-stack e-commerce platform with a unique sci-fi theme, built from the ground up with PHP and Bootstrap.',
             image: Music,
             link: 'https://github.com/hathisathissara/sci_music_store',
-            gradient: 'linear-gradient(135deg, #08ece8ff 0%, #7a5e96ff 100%)',
-            color: '#08ece8ff',
-            tags: ['PHP', 'MySQL', 'Bootstrap', 'JavaScript', 'HTML CSS'],
+            color: '#38bdf8',
+            tags: ['PHP', 'MySQL', 'Bootstrap'],
             category: 'web'
         },
         {
             title: 'Library Management System',
-            description: 'A robust system to digitize and automate library operations. This application features role-based access for librarians and members, a real-time book issuance/return system, and automatic fine calculation.',
+            description: 'A robust system to digitize and automate library operations with real-time tracking.',
             image: Library,
             link: 'https://github.com/hathisathissara/library-management',
-            gradient: 'linear-gradient(135deg, #a6aabbff 0%, #764ba2 100%)',
-            color: '#667eea',
-            tags: ['PHP', 'MySQL', 'Bootstrap', 'JavaScript', 'HTML CSS'],
+            color: '#8b5cf6',
+            tags: ['PHP', 'MySQL', 'JavaScript'],
             category: 'web'
         },
         {
             title: 'Gift E-commerce Website',
-            description: 'A curated gift-finding web application designed to simplify the shopping experience.Implemented advanced filtering by occasion and recipient, user wishlists, and product personalization options using PHP, MySQL, and Bootstrap.',
+            description: 'A curated gift-finding web application designed to simplify the shopping experience.',
             image: Gift,
             link: 'https://github.com/hathisathissara/library-management',
-            gradient: 'linear-gradient(135deg, #d617ddff 0%, #ccc5d2ff 100%)',
-            color: '#d617ddff',
-            tags: ['PHP', 'MySQL', 'Bootstrap', 'JavaScript', 'jQuery', 'HTML CSS'],
+            color: '#ec4899',
+            tags: ['PHP', 'MySQL', 'jQuery'],
             category: 'web'
         },
         {
@@ -50,9 +45,8 @@ function WorkPage() {
             description: 'Developed a feature-rich coding environment for beginner programmers.',
             image: 'https://images.unsplash.com/photo-1554260570-47e791ab2fc7?w=500&auto=format&fit=crop&q=60',
             link: '#',
-            gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-            color: '#f5576c',
-            tags: ['IDE', 'Education', 'Interactive'],
+            color: '#f59e0b',
+            tags: ['IDE', 'Education'],
             category: 'app'
         },
         {
@@ -60,9 +54,8 @@ function WorkPage() {
             description: 'A robust mobile application empowering users with cutting-edge technology tools.',
             image: 'https://plus.unsplash.com/premium_photo-1683262038148-2ac280407276?w=500&auto=format&fit=crop&q=60',
             link: 'https://github.com/hathisathissara/store-ios-app',
-            gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-            color: '#00f2fe',
-            tags: ['iOS', 'Android', 'Mobile'],
+            color: '#0ea5e9',
+            tags: ['iOS', 'Android'],
             category: 'app'
         },
         {
@@ -70,9 +63,8 @@ function WorkPage() {
             description: 'Streamlined school operations with an intuitive, all-in-one digital platform.',
             image: 'https://media.istockphoto.com/id/1340516763/photo/empty-classroom.webp?a=1&b=1&s=612x612&w=0&k=20&c=jbYGCEpqm8nTe-qwaydKnKU0zxQ1nYVMBsj2P0Sqez0=',
             link: 'https://github.com/hathisathissara/School-Management-System',
-            gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-            color: '#fa709a',
-            tags: ['Management', 'Database', 'Admin'],
+            color: '#10b981',
+            tags: ['Management', 'Admin'],
             category: 'software'
         },
         {
@@ -80,8 +72,7 @@ function WorkPage() {
             description: 'Designed a predictive analytics model leveraging AI for smarter decision-making.',
             image: 'https://media.istockphoto.com/id/2084953049/photo/neural-network-nodes-deep-learning-artificial-intelligence-machine-learning-model.webp?a=1&b=1&s=612x612&w=0&k=20&c=kySkpXxwGqj4vuZi3UkHtDioMVvUgXDDvGzrkgonU9Q=',
             link: 'https://github.com/hathisathissara/track-hand',
-            gradient: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
-            color: '#30cfd0',
+            color: '#6366f1',
             tags: ['AI', 'Python', 'TensorFlow'],
             category: 'ai'
         },
@@ -90,35 +81,32 @@ function WorkPage() {
             description: 'Built a dynamic tool to visualize complex datasets with clarity and precision.',
             image: 'https://media.istockphoto.com/id/1342186559/photo/a-business-man-using-a-computer-to-manage-documents-online-document-communication-database.webp?a=1&b=1&s=612x612&w=0&k=20&c=XQFDCEeEbTZpWLHoL6p_dkRYATnL4E5mxJyZObip5tQ=',
             link: '#',
-            gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-            color: '#a8edea',
-            tags: ['D3.js', 'Charts', 'Analytics'],
+            color: '#14b8a6',
+            tags: ['D3.js', 'Charts'],
             category: 'web'
         },
         {
             title: 'Recipe Finder',
-            description: 'RecipeFinder is a dynamic and intuitive web application designed to solve a common problem: "What can I make with the food I have?" By allowing users to input the ingredients on hand, the app fetches a curated list of recipes from the Spoonacular API, promoting creative cooking and reducing food waste.',
+            description: 'RecipeFinder is a dynamic and intuitive web application to find recipes by ingredients.',
             image: Recipeimage,
             link: 'https://github.com/hathisathissara/recipe-finder-app',
-            gradient: 'linear-gradient(135deg, #45e487ff 0%, #1c8a94ff 100%)',
-            color: '#45e487ff',
-            tags: ['React JS', 'REST API', 'ES6+', 'Offline Mode'],
+            color: '#f43f5e',
+            tags: ['React JS', 'REST API'],
             category: 'web'
         },
         {
             title: 'News App',
-            description: 'A responsive, single-page news application built with React that fetches and displays real-time headlines from around the world. The app allows users to filter news by category, providing a clean and intuitive interface for browsing the latest articles, powered by the Newsdata.io API.',
+            description: 'A responsive, single-page news application built with React that fetches real-time headlines.',
             image: News,
             link: 'https://github.com/hathisathissara/my-news-app',
-            gradient: 'linear-gradient(135deg, #310cebff 0%, #010c0dff 100%)',
-            color: '#310cebff',
-            tags: ['React JS', 'REST API', 'ES6+'],
+            color: '#8b5cf6',
+            tags: ['React JS', 'REST API'],
             category: 'web'
         },
     ];
 
     const categories = [
-        { id: 'all', name: 'All Projects', icon: faRocket },
+        { id: 'all', name: 'All', icon: faRocket },
         { id: 'web', name: 'Web', icon: faCode },
         { id: 'app', name: 'Mobile', icon: faRocket },
         { id: 'software', name: 'Software', icon: faCode },
@@ -138,359 +126,187 @@ function WorkPage() {
                     paddingTop: '120px',
                     paddingBottom: '100px',
                     minHeight: '100vh',
-                    background: 'linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%)',
+                    backgroundColor: '#030712',
                     overflow: 'hidden'
                 }}
             >
-                {/* Animated background particles */}
-                <div className="position-absolute w-100 h-100" style={{ pointerEvents: 'none', top: 0, left: 0 }}>
-                    {[...Array(3)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="position-absolute rounded-circle"
-                            style={{
-                                width: `${300 + i * 50}px`,
-                                height: `${300 + i * 50}px`,
-                                background: `radial-gradient(circle, rgba(${i % 2 === 0 ? '0, 188, 212' : '103, 58, 183'}, 0.1), transparent)`,
-                                top: `${20 + i * 30}%`,
-                                left: `${10 + i * 30}%`,
-                                animation: `float ${8 + i * 2}s ease-in-out infinite`,
-                                animationDelay: `${i}s`,
-                                filter: 'blur(60px)'
-                            }}
-                        />
-                    ))}
+                {/* Abstract Dark Aurora Background */}
+                <div className="position-absolute w-100 h-100" style={{ pointerEvents: 'none', top: 0, left: 0, zIndex: 0 }}>
+                    <motion.div
+                        animate={{ scale: [1, 1.3, 1], rotate: [0, -90, 0] }}
+                        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                        className="position-absolute"
+                        style={{
+                            width: '70vw', height: '70vw',
+                            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 50%)',
+                            top: '-20%', left: '-20%', filter: 'blur(80px)'
+                        }}
+                    />
+                    <motion.div
+                        animate={{ scale: [1, 1.2, 1], x: [0, -50, 0] }}
+                        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+                        className="position-absolute"
+                        style={{
+                            width: '60vw', height: '60vw',
+                            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 50%)',
+                            bottom: '-10%', right: '-10%', filter: 'blur(80px)'
+                        }}
+                    />
                 </div>
 
-                <div className="container position-relative" style={{ zIndex: 2 }}>
-                    {/* Section header */}
-                    <div style={{ animation: 'fadeInUp 1s ease', marginBottom: '3rem' }}>
-                        <h2
-                            className="mb-3"
-                            style={{
-                                fontSize: '3.5rem',
-                                fontWeight: '800',
-                                letterSpacing: '2px'
-                            }}
-                        >
-                            <span className="text-light">My Creative </span>
-                            <span
-                                style={{
-                                    background: 'linear-gradient(135deg, #00bcd4, #673ab7)',
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
-                                    backgroundClip: 'text'
-                                }}
-                            >
-                                Portfolio
-                            </span>
-                        </h2>
-                        <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '1.1rem', marginBottom: '2rem' }}>
-                            Explore my latest projects and creative work
-                        </p>
-                        <div
-                            className="mx-auto"
-                            style={{
-                                width: '100px',
-                                height: '4px',
-                                background: 'linear-gradient(90deg, transparent, #00bcd4, transparent)',
-                                borderRadius: '2px'
-                            }}
-                        />
-                    </div>
+                {/* Grid Overlay for Texture */}
+                <div 
+                    className="position-absolute w-100 h-100" 
+                    style={{
+                        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
+                        backgroundSize: '40px 40px',
+                        zIndex: 0,
+                    }}
+                />
 
-                    {/* Category Filter */}
-                    <div
-                        className="d-flex flex-wrap justify-content-center gap-3 mb-5"
-                        style={{ animation: 'fadeInUp 1s ease 0.2s both' }}
+                <div className="container position-relative" style={{ zIndex: 2 }}>
+                    {/* Header */}
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mb-5"
                     >
-                        {categories.map((cat,) => (
+                        <h2 className="display-4 fw-bolder mb-3" style={{ color: '#f8fafc', letterSpacing: '-1px' }}>
+                            Creative <span style={{ color: '#38bdf8' }}>Portfolio</span>
+                        </h2>
+                        <p className="text-secondary lead">Explore my latest projects and creations</p>
+                    </motion.div>
+
+                    {/* Filter Navigation */}
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="d-flex flex-wrap justify-content-center gap-2 mb-5"
+                    >
+                        {categories.map((cat) => (
                             <button
                                 key={cat.id}
                                 onClick={() => setFilterCategory(cat.id)}
-                                className="btn"
+                                className="btn position-relative fw-bold rounded-pill text-uppercase"
                                 style={{
-                                    background: filterCategory === cat.id
-                                        ? 'linear-gradient(135deg, #00bcd4, #673ab7)'
-                                        : 'rgba(255, 255, 255, 0.05)',
-                                    backdropFilter: 'blur(10px)',
-                                    border: filterCategory === cat.id
-                                        ? 'none'
-                                        : '2px solid rgba(255, 255, 255, 0.1)',
-                                    color: '#fff',
-                                    borderRadius: '50px',
-                                    padding: '0.8rem 2rem',
-                                    fontWeight: '600',
-                                    letterSpacing: '1px',
-                                    fontSize: '0.95rem',
-                                    transition: 'all 0.3s ease',
-                                    boxShadow: filterCategory === cat.id
-                                        ? '0 8px 25px rgba(0, 188, 212, 0.4)'
-                                        : 'none',
-                                    transform: filterCategory === cat.id ? 'translateY(-2px)' : 'none'
-                                }}
-                                onMouseEnter={(e) => {
-                                    if (filterCategory !== cat.id) {
-                                        e.currentTarget.style.background = 'rgba(0, 188, 212, 0.1)';
-                                        e.currentTarget.style.borderColor = '#00bcd4';
-                                    }
-                                }}
-                                onMouseLeave={(e) => {
-                                    if (filterCategory !== cat.id) {
-                                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                                    }
+                                    padding: '0.6rem 1.5rem',
+                                    fontSize: '0.85rem',
+                                    color: filterCategory === cat.id ? '#fff' : '#94a3b8',
+                                    background: 'rgba(255,255,255,0.03)',
+                                    border: '1px solid rgba(255,255,255,0.08)',
+                                    zIndex: 1,
+                                    overflow: 'hidden'
                                 }}
                             >
+                                {filterCategory === cat.id && (
+                                    <motion.div
+                                        layoutId="filterTab"
+                                        className="position-absolute top-0 start-0 w-100 h-100"
+                                        style={{ background: 'linear-gradient(135deg, #38bdf8, #8b5cf6)', zIndex: -1 }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                    />
+                                )}
                                 <FontAwesomeIcon icon={cat.icon} className="me-2" />
                                 {cat.name}
                             </button>
                         ))}
-                    </div>
+                    </motion.div>
 
-                    {/* Projects grid */}
-                    <div className="row justify-content-center g-4">
-                        {filteredProjects.map((project, index) => (
-                            <div
-                                key={index}
-                                className="col-md-6 col-lg-4"
-                                style={{
-                                    animation: `fadeInUp 0.6s ease ${index * 0.1}s both`
-                                }}
-                            >
-                                <div
-                                    className="h-100 position-relative overflow-hidden"
-                                    style={{
-                                        background: 'rgba(255, 255, 255, 0.03)',
-                                        backdropFilter: 'blur(10px)',
-                                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                                        borderRadius: '2rem',
-                                        transition: 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-                                        cursor: 'pointer',
-                                        transform: hoveredCard === index ? 'translateY(-15px)' : 'translateY(0)',
-                                        boxShadow: hoveredCard === index
-                                            ? `0 20px 60px ${project.color}50`
-                                            : 'none'
-                                    }}
-                                    onMouseEnter={() => setHoveredCard(index)}
-                                    onMouseLeave={() => setHoveredCard(null)}
+                    {/* Projects Grid using AnimatePresence and layout for smooth filtering */}
+                    <motion.div layout className="row justify-content-center g-4">
+                        <AnimatePresence>
+                            {filteredProjects.map((project) => (
+                                <motion.div
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.9 }}
+                                    transition={{ duration: 0.3 }}
+                                    key={project.title}
+                                    className="col-md-6 col-lg-4"
                                 >
-                                    {/* Image container with overlay */}
-                                    <div
-                                        className="position-relative overflow-hidden"
+                                    <motion.div
+                                        whileHover="hover"
+                                        className="h-100 rounded-4 position-relative overflow-hidden text-start d-flex flex-column"
                                         style={{
-                                            height: '240px',
-                                            borderRadius: '2rem 2rem 0 0'
+                                            background: 'rgba(255,255,255,0.02)',
+                                            border: '1px solid rgba(255,255,255,0.05)',
+                                            backdropFilter: 'blur(12px)',
+                                            boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)'
                                         }}
                                     >
-                                        <img
-                                            src={project.image}
-                                            className="w-100 h-100"
-                                            alt={project.title}
-                                            style={{
-                                                objectFit: 'cover',
-                                                transition: 'transform 0.6s ease',
-                                                transform: hoveredCard === index ? 'scale(1.2)' : 'scale(1)'
-                                            }}
-                                        />
-
-                                        {/* Gradient overlay */}
-                                        <div
-                                            className="position-absolute w-100 h-100 top-0 start-0"
-                                            style={{
-                                                background: hoveredCard === index
-                                                    ? `${project.gradient}, rgba(0, 0, 0, 0.4)`
-                                                    : 'linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%)',
-                                                mixBlendMode: hoveredCard === index ? 'normal' : 'normal',
-                                                opacity: hoveredCard === index ? 0.8 : 1,
-                                                transition: 'all 0.4s ease',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center'
-                                            }}
-                                        >
-                                            {/* View Project Icon */}
-                                            <div
-                                                style={{
-                                                    opacity: hoveredCard === index ? 1 : 0,
-                                                    transform: hoveredCard === index ? 'scale(1)' : 'scale(0.5)',
-                                                    transition: 'all 0.4s ease'
+                                        <div className="position-relative overflow-hidden" style={{ height: '220px' }}>
+                                            <motion.img
+                                                variants={{
+                                                    hover: { scale: 1.1 }
                                                 }}
+                                                transition={{ duration: 0.6 }}
+                                                src={project.image}
+                                                alt={project.title}
+                                                className="w-100 h-100 object-fit-cover"
+                                            />
+                                            {/* Hover Overlay */}
+                                            <motion.div 
+                                                variants={{
+                                                    hover: { opacity: 1 }
+                                                }}
+                                                initial={{ opacity: 0 }}
+                                                className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+                                                style={{ background: 'rgba(3, 7, 18, 0.7)', backdropFilter: 'blur(4px)' }}
                                             >
-                                                <FontAwesomeIcon
-                                                    icon={faExternalLinkAlt}
-                                                    style={{
-                                                        fontSize: '3rem',
-                                                        color: '#fff',
-                                                        filter: 'drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5))'
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-
-                                        {/* Status badge */}
-                                        <div
-                                            className="position-absolute top-0 end-0 m-3"
-                                            style={{
-                                                padding: '0.5rem 1rem',
-                                                borderRadius: '50px',
-                                                background: project.link === '#'
-                                                    ? 'rgba(255, 193, 7, 0.9)'
-                                                    : 'rgba(40, 167, 69, 0.9)',
-                                                backdropFilter: 'blur(10px)',
-                                                border: '1px solid rgba(255, 255, 255, 0.3)',
-                                                fontSize: '0.75rem',
-                                                fontWeight: '700',
-                                                color: '#fff',
-                                                textTransform: 'uppercase',
-                                                letterSpacing: '1px'
-                                            }}
-                                        >
-                                            {project.link === '#' ? 'Coming Soon' : 'Live'}
-                                        </div>
-                                    </div>
-
-                                    {/* Card content */}
-                                    <div className="p-4">
-                                        <h5
-                                            className="fw-bold mb-3"
-                                            style={{
-                                                color: hoveredCard === index ? project.color : '#fff',
-                                                transition: 'color 0.3s ease',
-                                                fontSize: '1.4rem',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                gap: '0.5rem'
-                                            }}
-                                        >
-                                            {project.title}
-                                        </h5>
-
-                                        <p
-                                            className="mb-3"
-                                            style={{
-                                                opacity: 0.85,
-                                                fontSize: '0.95rem',
-                                                lineHeight: '1.6',
-                                                minHeight: '3em'
-                                            }}
-                                        >
-                                            {project.description}
-                                        </p>
-
-                                        {/* Tags */}
-                                        <div className="d-flex flex-wrap gap-2 mb-4">
-                                            {project.tags.map((tag, i) => (
-                                                <span
-                                                    key={i}
-                                                    style={{
-                                                        padding: '0.4rem 0.9rem',
-                                                        borderRadius: '20px',
-                                                        background: hoveredCard === index
-                                                            ? `${project.color}25`
-                                                            : 'rgba(255, 255, 255, 0.08)',
-                                                        border: `1px solid ${hoveredCard === index ? project.color + '50' : 'transparent'}`,
-                                                        fontSize: '0.75rem',
-                                                        fontWeight: '600',
-                                                        color: hoveredCard === index ? project.color : 'rgba(255, 255, 255, 0.8)',
-                                                        transition: 'all 0.3s ease'
+                                                <a 
+                                                    href={project.link} 
+                                                    target={project.link !== '#' ? '_blank' : undefined}
+                                                    rel="noreferrer"
+                                                    className="btn rounded-pill fw-bold"
+                                                    style={{ 
+                                                        background: project.color, 
+                                                        color: '#fff', 
+                                                        border: 'none',
+                                                        boxShadow: `0 10px 20px ${project.color}60`
                                                     }}
                                                 >
-                                                    {tag}
-                                                </span>
-                                            ))}
+                                                    {project.link === '#' ? 'Coming Soon' : 'View Project'}
+                                                    <FontAwesomeIcon icon={faExternalLinkAlt} className="ms-2" />
+                                                </a>
+                                            </motion.div>
                                         </div>
 
-                                        {/* CTA Button */}
-                                        <a
-                                            href={project.link}
-                                            target={project.link !== '#' ? '_blank' : undefined}
-                                            rel="noopener noreferrer"
-                                            className="btn w-100 d-flex align-items-center justify-content-center gap-2"
-                                            style={{
-                                                background: hoveredCard === index
-                                                    ? project.gradient
-                                                    : 'rgba(255, 255, 255, 0.05)',
-                                                border: hoveredCard === index
-                                                    ? 'none'
-                                                    : '2px solid rgba(255, 255, 255, 0.15)',
-                                                color: '#fff',
-                                                borderRadius: '50px',
-                                                padding: '0.9rem',
-                                                fontWeight: '600',
-                                                letterSpacing: '1px',
-                                                textTransform: 'uppercase',
-                                                fontSize: '0.85rem',
-                                                transition: 'all 0.3s ease',
-                                                boxShadow: hoveredCard === index
-                                                    ? `0 10px 30px ${project.color}40`
-                                                    : 'none',
-                                                pointerEvents: project.link === '#' ? 'none' : 'auto',
-                                                opacity: project.link === '#' ? 0.6 : 1
-                                            }}
-                                        >
-                                            {project.link === '#' ? (
-                                                <>Coming Soon</>
-                                            ) : (
-                                                <>
-                                                    View Project
-                                                    <FontAwesomeIcon icon={faExternalLinkAlt} style={{ fontSize: '0.9rem' }} />
-                                                </>
-                                            )}
-                                        </a>
-                                    </div>
+                                        <div className="p-4 flex-grow-1 d-flex flex-column">
+                                            <h5 className="fw-bold mb-2 text-light">{project.title}</h5>
+                                            <p className="text-secondary small mb-4 flex-grow-1" style={{ lineHeight: '1.6' }}>
+                                                {project.description}
+                                            </p>
+                                            <div className="d-flex flex-wrap gap-2 mt-auto">
+                                                {project.tags.map(tag => (
+                                                    <span 
+                                                        key={tag} 
+                                                        className="badge rounded-pill"
+                                                        style={{ 
+                                                            background: `${project.color}20`, 
+                                                            color: project.color,
+                                                            border: `1px solid ${project.color}40`,
+                                                            fontWeight: '600'
+                                                        }}
+                                                    >
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
+                    </motion.div>
 
-                                    {/* Decorative corner gradient */}
-                                    <div
-                                        className="position-absolute"
-                                        style={{
-                                            bottom: 0,
-                                            right: 0,
-                                            width: '120px',
-                                            height: '120px',
-                                            background: `radial-gradient(circle at bottom right, ${project.color}15, transparent)`,
-                                            opacity: hoveredCard === index ? 1 : 0,
-                                            transition: 'opacity 0.4s ease',
-                                            pointerEvents: 'none',
-                                            borderRadius: '0 0 2rem 0'
-                                        }}
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Empty state */}
                     {filteredProjects.length === 0 && (
-                        <div
-                            className="text-center py-5"
-                            style={{ animation: 'fadeInUp 0.6s ease' }}
-                        >
-                            <p style={{ fontSize: '1.2rem', color: 'rgba(255, 255, 255, 0.5)' }}>
-                                No projects found in this category.
-                            </p>
+                        <div className="text-center py-5">
+                            <p className="text-secondary lead">No projects found in this category.</p>
                         </div>
                     )}
                 </div>
-
-                <style>{`
-                    @keyframes fadeInUp {
-                        from {
-                            opacity: 0;
-                            transform: translateY(40px);
-                        }
-                        to {
-                            opacity: 1;
-                            transform: translateY(0);
-                        }
-                    }
-
-                    @keyframes float {
-                        0%, 100% { transform: translate(0, 0); }
-                        33% { transform: translate(20px, -20px); }
-                        66% { transform: translate(-20px, 20px); }
-                    }
-                `}</style>
             </section>
         </PageAnimator>
     );

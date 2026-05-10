@@ -1,393 +1,301 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import profileImage from '../assets/Profile.jpg';
 import PageAnimator from '../components/PageAnimator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencilRuler, faCode, faMobileAlt, faLaptopCode, faGraduationCap} from '@fortawesome/free-solid-svg-icons';
+import { faPencilRuler, faCode, faMobileAlt, faLaptopCode, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 
 function AboutPage() {
   const [activeTab, setActiveTab] = useState('skills');
 
   const skills = [
-    { icon: faPencilRuler, title: 'UI/UX', desc: 'Designing engaging web/app interfaces', color: '#ff6b6b', delay: '0s' },
-    { icon: faCode, title: 'Web Development', desc: 'Building responsive websites', color: '#4ecdc4', delay: '0.1s' },
-    { icon: faMobileAlt, title: 'App Development', desc: 'Android & iOS cross-platform apps', color: '#45b7d1', delay: '0.2s' },
-    { icon: faLaptopCode, title: 'Software Development', desc: 'Custom software solutions', color: '#f7b731', delay: '0.3s' }
+    { icon: faPencilRuler, title: 'UI/UX', desc: 'Designing engaging web/app interfaces', color: '#ec4899' },
+    { icon: faCode, title: 'Web Development', desc: 'Building responsive websites', color: '#0ea5e9' },
+    { icon: faMobileAlt, title: 'App Development', desc: 'Android & iOS cross-platform apps', color: '#8b5cf6' },
+    { icon: faLaptopCode, title: 'Software Development', desc: 'Custom software solutions', color: '#f59e0b' }
   ];
 
   const experiences = [
-    { year: '2024 - 2025', title: 'National Diploma in ICT', delay: '0s' },
-    { year: '2025', title: 'Server-Side Web Programming', delay: '0.1s' },
-    { year: '2023', title: 'Certificate in English', delay: '0.2s' },
-    { year: '2023', title: 'Front-End Web Development', delay: '0.3s' },
-    { year: '2023', title: 'Web Design For Beginners', delay: '0.4s' },
-    { year: '2023', title: 'Python For Beginners', delay: '0.5s' },
-    { year: '2023', title: 'Introduction TO Cybersecurity', delay: '0.6s' },
+    { year: '2024 - 2025', title: 'National Diploma in ICT' },
+    { year: '2025', title: 'Server-Side Web Programming' },
+    { year: '2023', title: 'Certificate in English' },
+    { year: '2023', title: 'Front-End Web Development' },
+    { year: '2023', title: 'Web Design For Beginners' },
+    { year: '2023', title: 'Python For Beginners' },
+    { year: '2023', title: 'Introduction TO Cybersecurity' },
   ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
 
   return (
     <PageAnimator>
       <section
-        className="py-5 text-white text-center position-relative"
+        className="py-5 text-white position-relative"
         id="about"
         style={{
-          paddingTop: '80px',
+          paddingTop: '100px',
+          paddingBottom: '100px',
           minHeight: '100vh',
-          background: 'linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%)',
+          backgroundColor: '#030712',
           overflow: 'hidden'
         }}
       >
-        {/* Animated background orbs */}
-        <div className="position-absolute w-100 h-100" style={{ pointerEvents: 'none', top: 0, left: 0 }}>
-          <div
-            className="position-absolute rounded-circle"
+        {/* Abstract Dark Aurora Background */}
+        <div className="position-absolute w-100 h-100" style={{ pointerEvents: 'none', top: 0, left: 0, zIndex: 0 }}>
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="position-absolute"
             style={{
-              width: '400px',
-              height: '400px',
-              background: 'radial-gradient(circle, rgba(0, 188, 212, 0.15), transparent)',
-              top: '-10%',
-              right: '-10%',
-              animation: 'float 8s ease-in-out infinite',
-              filter: 'blur(60px)'
+              width: '600px', height: '600px',
+              background: 'radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 60%)',
+              top: '-10%', right: '-10%', filter: 'blur(60px)'
             }}
           />
-          <div
-            className="position-absolute rounded-circle"
+          <motion.div
+            animate={{ scale: [1, 1.5, 1], x: [0, 50, 0] }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="position-absolute"
             style={{
-              width: '350px',
-              height: '350px',
-              background: 'radial-gradient(circle, rgba(103, 58, 183, 0.15), transparent)',
-              bottom: '10%',
-              left: '-5%',
-              animation: 'float 10s ease-in-out infinite',
-              animationDelay: '2s',
-              filter: 'blur(60px)'
+              width: '500px', height: '500px',
+              background: 'radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 60%)',
+              bottom: '10%', left: '-5%', filter: 'blur(60px)'
             }}
           />
         </div>
 
-        <div className="container position-relative" style={{ paddingTop: '80px', zIndex: 2 }}>
-          {/* Profile Image with enhanced effects */}
-          <div className="row justify-content-center mb-5">
-            <div className="col-6 col-md-3">
-              <div
+        {/* Grid Overlay for Texture */}
+        <div 
+            className="position-absolute w-100 h-100" 
+            style={{
+                backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
+                backgroundSize: '40px 40px',
+                zIndex: 0,
+            }}
+        />
+
+        <div className="container position-relative" style={{ zIndex: 2 }}>
+          
+          <div className="row align-items-center mb-5">
+            {/* Profile Image Column */}
+            <div className="col-12 col-lg-5 text-center mb-5 mb-lg-0">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
                 className="position-relative d-inline-block"
-                style={{ animation: 'fadeInUp 1s ease' }}
               >
-                {/* Animated ring */}
-                <div
+                {/* Animated glowing ring */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                   className="position-absolute"
                   style={{
                     inset: '-8px',
                     borderRadius: '50%',
-                    background: 'linear-gradient(45deg, #00bcd4, #673ab7, #00bcd4)',
-                    backgroundSize: '300% 300%',
-                    animation: 'gradientRotate 3s ease infinite',
+                    background: 'conic-gradient(from 0deg, #38bdf8, #8b5cf6, #ec4899, #38bdf8)',
                     padding: '4px',
-                    zIndex: 0
+                    zIndex: 0,
+                    filter: 'blur(8px)',
+                    opacity: 0.7
                   }}
                 />
-
-                {/* Outer glow */}
-                <div
-                  className="position-absolute"
-                  style={{
-                    inset: '-15px',
-                    borderRadius: '50%',
-                    background: 'radial-gradient(circle, rgba(0, 188, 212, 0.3), transparent)',
-                    filter: 'blur(20px)',
-                    animation: 'pulse 2s ease-in-out infinite',
-                    zIndex: -1
-                  }}
-                />
-
-                <img
+                
+                {/* Image itself */}
+                <motion.img
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
                   src={profileImage}
-                  className="img-fluid position-relative"
+                  className="position-relative"
                   alt="Profile"
                   style={{
-                    aspectRatio: '1 / 1',
+                    width: '280px',
+                    height: '280px',
                     objectFit: 'cover',
                     borderRadius: '50%',
-                    border: '4px solid #0a0e27',
-                    boxShadow: '0 15px 50px rgba(0, 188, 212, 0.3)',
-                    transition: 'transform 0.4s ease',
+                    border: '4px solid #030712',
+                    boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
                     zIndex: 1
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                  onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 />
-              </div>
+              </motion.div>
             </div>
-          </div>
 
-          {/* Name and title */}
-          <div style={{ animation: 'fadeInUp 1s ease 0.2s both' }}>
-            <h1
-              className="display-5 fw-bold mb-3"
-              style={{
-                background: 'linear-gradient(135deg, #00bcd4, #673ab7)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                letterSpacing: '2px'
-              }}
-            >
-              Hathisa Thissara
-            </h1>
-          </div>
-
-          <div style={{ animation: 'fadeInUp 1s ease 0.4s both' }}>
-            <p className="lead px-md-5 mb-5" style={{
-              opacity: 0.9,
-              maxWidth: '700px',
-              margin: '0 auto 3rem',
-              lineHeight: '1.8'
-            }}>
-              Passionate Web Developer skilled in modern web technologies and dedicated to crafting responsive, intuitive user experiences.
-            </p>
-          </div>
-
-          {/* Tab buttons with enhanced design */}
-          <div
-            className="btn-group mb-5"
-            role="group"
-            style={{ animation: 'fadeInUp 1s ease 0.6s both' }}
-          >
-            {['skills', 'experience'].map((tab) => (
-              <button
-                key={tab}
-                className="btn px-5 py-3"
-                onClick={() => setActiveTab(tab)}
+            {/* Bio Column */}
+            <div className="col-12 col-lg-7 text-center text-lg-start">
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="display-4 fw-bolder mb-3"
                 style={{
-                  background: activeTab === tab
-                    ? 'linear-gradient(135deg, #00bcd4, #0097a7)'
-                    : 'rgba(255, 255, 255, 0.05)',
-                  border: activeTab === tab
-                    ? 'none'
-                    : '2px solid rgba(0, 188, 212, 0.3)',
-                  color: '#fff',
-                  borderRadius: activeTab === tab ? '50px' : '50px',
-                  fontWeight: '600',
-                  letterSpacing: '1px',
-                  textTransform: 'capitalize',
-                  transition: 'all 0.4s ease',
-                  boxShadow: activeTab === tab
-                    ? '0 8px 25px rgba(0, 188, 212, 0.4)'
-                    : 'none',
-                  transform: activeTab === tab ? 'translateY(-2px)' : 'none'
-                }}
-                onMouseEnter={(e) => {
-                  if (activeTab !== tab) {
-                    e.currentTarget.style.background = 'rgba(0, 188, 212, 0.1)';
-                    e.currentTarget.style.borderColor = '#00bcd4';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (activeTab !== tab) {
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                    e.currentTarget.style.borderColor = 'rgba(0, 188, 212, 0.3)';
-                  }
+                  background: 'linear-gradient(to right, #e2e8f0, #94a3b8)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  letterSpacing: '-1px'
                 }}
               >
-                {tab}
-              </button>
-            ))}
+                Hathisa Thissara
+              </motion.h1>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="lead mb-4 text-secondary" 
+                style={{ lineHeight: '1.8', maxWidth: '600px', margin: '0 auto' }}
+              >
+                Passionate <strong className="text-light">Web Developer</strong> skilled in modern web technologies. I am dedicated to crafting responsive, intuitive user experiences with clean, efficient code.
+              </motion.p>
+
+              {/* Segmented Control for Tabs */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="d-flex p-1 rounded-pill mb-4 mx-auto mx-lg-0"
+                style={{ 
+                    background: 'rgba(255,255,255,0.05)', 
+                    backdropFilter: 'blur(10px)',
+                    width: 'fit-content',
+                    border: '1px solid rgba(255,255,255,0.1)'
+                }}
+              >
+                {['skills', 'experience'].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className="btn border-0 text-capitalize fw-bold rounded-pill position-relative"
+                    style={{
+                      padding: '0.6rem 2rem',
+                      color: activeTab === tab ? '#fff' : '#94a3b8',
+                      transition: 'color 0.3s ease',
+                      zIndex: 1
+                    }}
+                  >
+                    {activeTab === tab && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="position-absolute top-0 start-0 w-100 h-100 rounded-pill"
+                        style={{ background: 'linear-gradient(135deg, #38bdf8, #8b5cf6)', zIndex: -1 }}
+                        initial={false}
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                    {tab}
+                  </button>
+                ))}
+              </motion.div>
+            </div>
           </div>
 
-          {/* Skills Tab - Card Grid */}
-          {activeTab === 'skills' && (
-            <div className="row justify-content-center g-4" style={{ maxWidth: '900px', margin: '0 auto' }}>
-              {skills.map((skill, index) => (
-                <div
-                  key={index}
-                  className="col-md-6"
-                  style={{ animation: `fadeInUp 0.6s ease ${skill.delay} both` }}
+          {/* Dynamic Content Area */}
+          <div className="mt-5 pt-3">
+            <AnimatePresence mode="wait">
+              {activeTab === 'skills' && (
+                <motion.div
+                  key="skills"
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit={{ opacity: 0, y: -20 }}
+                  className="row justify-content-center g-4"
                 >
-                  <div
-                    className="p-4 h-100 position-relative overflow-hidden"
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      backdropFilter: 'blur(10px)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '1.5rem',
-                      transition: 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-                      cursor: 'pointer'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-10px)';
-                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
-                      e.currentTarget.style.borderColor = `${skill.color}80`;
-                      e.currentTarget.style.boxShadow = `0 15px 40px ${skill.color}40`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                      e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                      e.currentTarget.style.boxShadow = 'none';
-                    }}
-                  >
-                    {/* Icon with gradient background */}
-                    <div
-                      className="d-flex align-items-center justify-content-center mb-3"
-                      style={{
-                        width: '70px',
-                        height: '70px',
-                        borderRadius: '20px',
-                        background: `linear-gradient(135deg, ${skill.color}40, ${skill.color}20)`,
-                        margin: '0 auto'
-                      }}
-                    >
-                      <FontAwesomeIcon
-                        icon={skill.icon}
-                        className="fs-2"
-                        style={{ color: skill.color }}
-                      />
-                    </div>
-
-                    <h5 className="fw-bold mb-2" style={{ color: skill.color }}>
-                      {skill.title}
-                    </h5>
-                    <p className="mb-0" style={{ opacity: 0.8, fontSize: '0.95rem' }}>
-                      {skill.desc}
-                    </p>
-
-                    {/* Decorative corner accent */}
-                    <div
-                      className="position-absolute"
-                      style={{
-                        top: 0,
-                        right: 0,
-                        width: '60px',
-                        height: '60px',
-                        background: `linear-gradient(135deg, ${skill.color}20, transparent)`,
-                        borderRadius: '0 1.5rem 0 100%'
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Experience Tab - Timeline Style */}
-          {activeTab === 'experience' && (
-            <div className="mx-auto" style={{ maxWidth: '700px' }}>
-              <div className="position-relative">
-                {/* Timeline line */}
-                <div
-                  className="position-absolute start-50 translate-middle-x"
-                  style={{
-                    width: '2px',
-                    height: '100%',
-                    background: 'linear-gradient(180deg, #00bcd4, #673ab7)',
-                    top: 0
-                  }}
-                />
-
-                {experiences.map((exp, index) => (
-                  <div
-                    key={index}
-                    className="row mb-4 position-relative"
-                    style={{ animation: `fadeInUp 0.6s ease ${exp.delay} both` }}
-                  >
-                    <div className="col-12">
-                      <div
-                        className="p-4 position-relative"
+                  {skills.map((skill, index) => (
+                    <motion.div key={index} variants={itemVariants} className="col-md-6 col-lg-3">
+                      <motion.div
+                        whileHover={{ y: -10 }}
+                        className="p-4 h-100 rounded-4 position-relative overflow-hidden group"
                         style={{
-                          background: 'rgba(255, 255, 255, 0.05)',
+                          background: 'rgba(255,255,255,0.03)',
+                          border: '1px solid rgba(255,255,255,0.08)',
                           backdropFilter: 'blur(10px)',
-                          border: '1px solid rgba(255, 255, 255, 0.1)',
-                          borderRadius: '1.5rem',
-                          marginLeft: index % 2 === 0 ? '0' : 'auto',
-                          marginRight: index % 2 === 0 ? 'auto' : '0',
-                          maxWidth: '90%',
-                          transition: 'all 0.4s ease'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'translateX(' + (index % 2 === 0 ? '10px' : '-10px') + ')';
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
-                          e.currentTarget.style.borderColor = 'rgba(0, 188, 212, 0.5)';
-                          e.currentTarget.style.boxShadow = '0 15px 40px rgba(0, 188, 212, 0.2)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'translateX(0)';
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                          e.currentTarget.style.boxShadow = 'none';
                         }}
                       >
-                        {/* Timeline dot */}
-                        <div
-                          className="position-absolute top-50 start-50 translate-middle"
+                        <div 
+                          className="d-flex align-items-center justify-content-center mb-4 rounded-3"
                           style={{
-                            width: '20px',
-                            height: '20px',
-                            borderRadius: '50%',
-                            background: 'linear-gradient(135deg, #00bcd4, #673ab7)',
-                            border: '3px solid #0a0e27',
-                            boxShadow: '0 0 20px rgba(0, 188, 212, 0.6)',
-                            left: '50%',
-                            zIndex: 2
+                            width: '60px', height: '60px',
+                            background: `linear-gradient(135deg, ${skill.color}20, transparent)`,
+                            border: `1px solid ${skill.color}40`
                           }}
-                        />
+                        >
+                          <FontAwesomeIcon icon={skill.icon} className="fs-3" style={{ color: skill.color }} />
+                        </div>
+                        <h5 className="fw-bold text-light mb-2">{skill.title}</h5>
+                        <p className="text-secondary small mb-0">{skill.desc}</p>
+                      </motion.div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
 
-                        <div className="text-start">
-                          <FontAwesomeIcon
-                            icon={faGraduationCap}
-                            className="me-2 fs-4"
-                            style={{ color: '#00bcd4' }}
-                          />
-                          <span
-                            className="fw-bold fs-5"
+              {activeTab === 'experience' && (
+                <motion.div
+                  key="experience"
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit={{ opacity: 0, y: -20 }}
+                  className="mx-auto" style={{ maxWidth: '800px' }}
+                >
+                  <div className="position-relative ps-4 ps-md-0">
+                    {/* Timeline Line */}
+                    <div className="position-absolute h-100 d-md-none" style={{
+                      width: '2px', background: 'linear-gradient(to bottom, #38bdf8, #8b5cf6, transparent)', left: '0', top: 0
+                    }} />
+                    <div className="position-absolute h-100 start-50 translate-middle-x d-none d-md-block" style={{
+                      width: '2px', background: 'linear-gradient(to bottom, #38bdf8, #8b5cf6, transparent)', top: 0
+                    }} />
+
+                    {experiences.map((exp, index) => (
+                      <motion.div key={index} variants={itemVariants} className={`row mb-4 ${index % 2 === 0 ? 'flex-md-row-reverse' : ''}`}>
+                        <div className="col-12 col-md-6 position-relative">
+                           {/* Mobile connector line */}
+                           <div className="position-absolute d-md-none" style={{
+                              width: '20px', height: '2px', background: '#38bdf8', left: '-20px', top: '24px'
+                           }} />
+                           
+                           {/* Desktop dot */}
+                           <div className="position-absolute d-none d-md-block rounded-circle" style={{
+                              width: '12px', height: '12px', background: '#38bdf8', 
+                              top: '20px',
+                              ...(index % 2 === 0 ? { left: '-6px' } : { right: '-6px' }),
+                              boxShadow: '0 0 10px #38bdf8'
+                           }} />
+
+                           <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            className="p-4 rounded-4"
                             style={{
-                              background: 'linear-gradient(135deg, #00bcd4, #0097a7)',
-                              WebkitBackgroundClip: 'text',
-                              WebkitTextFillColor: 'transparent',
-                              backgroundClip: 'text'
+                              background: 'rgba(255,255,255,0.03)',
+                              border: '1px solid rgba(255,255,255,0.08)',
+                              backdropFilter: 'blur(10px)',
+                              marginLeft: index % 2 !== 0 ? 'auto' : '1.5rem', 
+                              marginRight: index % 2 === 0 ? 'auto' : '1.5rem'
                             }}
                           >
-                            {exp.year}
-                          </span>
-                          <p className="mb-0 mt-2" style={{ opacity: 0.9 }}>
-                            {exp.title}
-                          </p>
+                            <div className="d-flex align-items-center mb-2">
+                                <FontAwesomeIcon icon={faGraduationCap} className="me-2" style={{ color: '#8b5cf6' }} />
+                                <span className="fw-bold" style={{ color: '#38bdf8' }}>{exp.year}</span>
+                            </div>
+                            <h6 className="text-light mb-0">{exp.title}</h6>
+                          </motion.div>
                         </div>
-                      </div>
-                    </div>
+                      </motion.div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-          )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
-
-        <style>{`
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          @keyframes gradientRotate {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-          }
-
-          @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.1); opacity: 0.5; }
-          }
-
-          @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-          }
-        `}</style>
       </section>
     </PageAnimator>
   );
