@@ -39,7 +39,7 @@ function WorkPage() {
             title: 'Gift E-commerce Website',
             description: 'A curated gift-finding web application designed to simplify the shopping experience.Implemented advanced filtering by occasion and recipient, user wishlists, and product personalization options using PHP, MySQL, and Bootstrap.',
             image: Gift,
-            link: 'https://github.com/hathisathissara/library-managementhttps://github.com/hathisathissara/e-commerce',
+            link: 'https://github.com/hathisathissara/library-management',
             gradient: 'linear-gradient(135deg, #d617ddff 0%, #ccc5d2ff 100%)',
             color: '#d617ddff',
             tags: ['PHP', 'MySQL', 'Bootstrap', 'JavaScript', 'jQuery', 'HTML CSS'],

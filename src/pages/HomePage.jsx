@@ -242,7 +242,7 @@ function HomePage() {
                             Hire Me
                         </button>
                         <a
-                            href="/hathisa_thissara_2025.pdf"
+                            href="/hathisa_thissara_2026.pdf"
                             download
                             className="btn px-5 py-3"
                             style={{
